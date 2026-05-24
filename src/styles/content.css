@@ -1,6 +1,6 @@
-/* Translation nodes — minimal, inherit page styles */
+/* Translation nodes — seamless inline, inherit page styles */
 .xlat-translation {
-  /* no border, no background, no padding — just flow below the original */
+  display: inline;
   margin: 0;
   padding: 0;
   color: inherit;

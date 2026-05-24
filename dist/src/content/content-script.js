@@ -121,7 +121,7 @@ function collectBlocks({ minLength = 2, maxBlocks = 160, viewportOnly = false } 
 }
 function appendTranslation(block, translatedText, { targetLanguage = 'unknown', status = 'translated' } = {}) {
   const existing = block.element.parentElement?.querySelector(`.xlat-translation[data-xlat-id="${CSS.escape(block.id)}"]`);
-  const node = existing || document.createElement('div');
+  const node = existing || document.createElement('span');
   node.className = 'xlat-translation';
   node.dataset.xlatOwned = 'true';
   node.dataset.xlatId = block.id;
