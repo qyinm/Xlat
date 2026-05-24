@@ -1,46 +1,30 @@
+/* Translation nodes — minimal, inherit page styles */
 .xlat-translation {
-  margin: 0.45em 0 0.85em;
-  padding: 0.62em 0.75em;
-  border: 1px solid rgb(88 117 209 / 22%);
-  border-left: 4px solid #5875d1;
-  border-radius: 0 10px 10px 0;
-  background: linear-gradient(180deg, #f8faff, #f2f5ff);
-  color: #26324d;
-  font-size: 0.95em;
-  line-height: 1.55;
-  box-shadow: 0 4px 14px rgb(30 49 91 / 7%);
+  /* no border, no background, no padding — just flow below the original */
+  margin: 0;
+  padding: 0;
+  color: inherit;
+  font: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
 }
-.xlat-translation::before {
-  content: "Xlat · " attr(lang);
-  display: block;
-  margin-bottom: 0.28em;
-  color: #5875d1;
-  font: 700 0.72em/1.2 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+.xlat-translation[data-xlat-status="loading"] {
+  opacity: 0.5;
 }
-.xlat-translation[data-xlat-status="loading"] { color: #5f6f8f; border-left-color: #b7791f; background: #fff8ed; }
-.xlat-translation[data-xlat-status="error"] { color: #7f1d1d; border-left-color: #c2413f; background: #fff5f5; }
+.xlat-translation[data-xlat-status="error"] {
+  color: #dc2626;
+}
+
+/* Selection overlay — minimal floating tooltip */
 .xlat-selection-overlay {
   position: absolute;
   z-index: 2147483647;
-  max-width: min(440px, 90vw);
-  padding: 12px 14px;
-  border: 1px solid #b8c4e6;
-  border-radius: 14px;
-  background: rgb(255 255 255 / 96%);
-  color: #172033;
-  box-shadow: 0 16px 48px rgb(15 23 42 / 22%);
-  backdrop-filter: blur(10px);
-  font: 14px/1.5 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-}
-.xlat-selection-overlay::before {
-  content: "Xlat selection";
-  display: block;
-  margin-bottom: 4px;
-  color: #5875d1;
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  max-width: min(400px, 80vw);
+  padding: 8px 12px;
+  border: 1px solid #d4d4d4;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #000000;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  font: 13px/1.5 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
