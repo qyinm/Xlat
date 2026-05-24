@@ -25,7 +25,19 @@ export function showSelectionOverlay(text) {
   const overlay = document.createElement('div');
   overlay.className = 'xlat-selection-overlay';
   overlay.dataset.xlatOwned = 'true';
-  overlay.textContent = text;
+
+  const content = document.createElement('span');
+  content.className = 'xlat-selection-text';
+  content.textContent = text;
+  overlay.appendChild(content);
+
+  const close = document.createElement('button');
+  close.className = 'xlat-selection-close';
+  close.textContent = '\u00d7';
+  close.setAttribute('aria-label', 'Close translation');
+  close.addEventListener('click', () => overlay.remove());
+  overlay.appendChild(close);
+
   overlay.style.left = `${Math.max(8, rect.left + window.scrollX)}px`;
   overlay.style.top = `${Math.max(8, rect.bottom + window.scrollY + 8)}px`;
   document.body.appendChild(overlay);
