@@ -135,6 +135,14 @@ class RenderNode {
     this.lang = '';
     this.textContent = '';
     this.removed = false;
+    this.attributes = {};
+    this.listeners = {};
+  }
+  setAttribute(name, value) {
+    this.attributes[name] = String(value);
+  }
+  addEventListener(type, listener) {
+    this.listeners[type] = listener;
   }
   insertAdjacentElement(_position, node) {
     const siblings = this.parentElement.children;

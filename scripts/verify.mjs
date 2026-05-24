@@ -59,7 +59,7 @@ if (/fetch\s*\(|XMLHttpRequest|WebSocket|sendNativeMessage/.test(broker)) {
 
 const popup = await readFile('src/popup/popup.html', 'utf8');
 const popupJs = await readFile('src/popup/popup.js', 'utf8');
-for (const id of ['translatePage', 'translateSelection', 'clearTranslations', 'runSpike', 'displayMode', 'maxBlocks', 'viewportOnly']) {
+for (const id of ['sourceLanguage', 'targetLanguage', 'translatePage', 'translateSelection', 'clearTranslations', 'displayMode', 'maxBlocks', 'viewportOnly']) {
   if (!popup.includes(`id="${id}"`)) throw new Error(`Popup missing control: ${id}`);
 }
 if (/openBroker|OPEN_BROKER/.test(popupJs + popup)) {

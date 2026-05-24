@@ -19,3 +19,5 @@ dist/
 .codex/skills/.system/**
 !.codex/prompts/
 !.codex/prompts/**
+
+docs/chrome-web-store
