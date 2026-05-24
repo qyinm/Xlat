@@ -1,0 +1,2 @@
+.xlat-translation { margin: 0.35em 0 0.7em; padding: 0.45em 0.6em; border-left: 3px solid #5875d1; background: #f5f7ff; color: #26324d; font-size: 0.95em; }
+.xlat-selection-overlay { position: absolute; z-index: 2147483647; max-width: min(420px, 90vw); padding: 10px; border: 1px solid #b8c4e6; border-radius: 10px; background: white; box-shadow: 0 8px 30px rgb(0 0 0 / 18%); }

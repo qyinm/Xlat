@@ -1,0 +1,8 @@
+body { min-width: 340px; margin: 0; font: 13px system-ui, sans-serif; color: #172033; }
+main { padding: 14px; display: grid; gap: 10px; }
+h1 { font-size: 18px; margin: 0; }
+label { display: grid; gap: 4px; }
+input { padding: 6px; }
+button { padding: 8px 10px; border: 1px solid #8ea0c0; border-radius: 8px; background: #f7f9ff; cursor: pointer; }
+#status { margin: 0; color: #42526e; }
+pre { max-height: 360px; overflow: auto; white-space: pre-wrap; background: #f5f7fb; padding: 8px; border-radius: 8px; }

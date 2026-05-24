@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Xlat</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <main>
+      <h1>Xlat</h1>
+      <label>Target language <input id="targetLanguage" value="ko" maxlength="12" /></label>
+      <label>Display mode
+        <select id="displayMode">
+          <option value="append-below-original">Original + translation below</option>
+          <option value="replace-text" disabled>Replace text (phase 2)</option>
+        </select>
+      </label>
+      <details>
+        <summary>Advanced limits</summary>
+        <label>Max blocks per run <input id="maxBlocks" type="number" min="1" max="500" value="80" /></label>
+        <label><input id="viewportOnly" type="checkbox" /> Translate visible viewport first</label>
+        <label><input id="includeCode" type="checkbox" disabled /> Include code blocks (phase 2)</label>
+      </details>
+      <button id="translatePage">Translate page</button>
+      <button id="translateSelection">Translate selection</button>
+      <button id="clearTranslations">Clear translations</button>
+      <button id="runSpike">Run AI context spike</button>
+      <p id="status">Ready.</p>
+      <pre id="output" aria-live="polite"></pre>
+    </main>
+    <script type="module" src="popup.js"></script>
+  </body>
+</html>

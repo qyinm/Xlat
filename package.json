@@ -1,0 +1,21 @@
+{
+  "name": "xlat-local-page-translator",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "description": "Local-only Chrome MV3 page translator using Chrome built-in Translator API.",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node scripts/unit-tests.mjs && node scripts/verify.mjs",
+    "verify": "npm run build && npm test",
+    "unit": "node scripts/unit-tests.mjs",
+    "smoke": "node scripts/chrome-smoke.mjs"
+  },
+  "keywords": [
+    "chrome-extension",
+    "mv3",
+    "translator-api",
+    "local-first"
+  ],
+  "license": "UNLICENSED"
+}
