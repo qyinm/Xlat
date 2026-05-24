@@ -166,7 +166,17 @@ async function translateLocal(text, { targetLanguage = 'ko', sourceLanguage } = 
   if (!translator) {
     const availability = await globalThis.Translator.availability({ sourceLanguage: source, targetLanguage });
     if (availability === 'unavailable') throw new Error(`Translation unavailable for ${key}.`);
-    translator = await globalThis.Translator.create({ sourceLanguage: source, targetLanguage });
+    try {
+      translator = await globalThis.Translator.create({ sourceLanguage: source, targetLanguage });
+    } catch (createError) {
+      const msg = String(createError?.message ?? createError);
+      if (/user gesture/i.test(msg)) {
+        // content script lacks user activation — fall back via broker
+        const broker = await translateViaBroker(text, { targetLanguage, sourceLanguage });
+        return broker.translatedText;
+      }
+      throw createError;
+    }
     translatorCache.set(key, translator);
   }
   return translator.translate(text);
@@ -182,7 +192,7 @@ async function translatePage(options = {}) {
       const translated = await translateLocal(block.text, { targetLanguage });
       appendTranslation(block, translated, { targetLanguage, status: 'translated' });
     } catch (error) {
-      appendTranslation(block, `Xlat unavailable locally: ${String(error?.message ?? error)}`, { targetLanguage, status: 'error' });
+      appendTranslation(block, String(error?.message ?? error), { targetLanguage, status: 'error' });
     }
     setStatus({ completed: currentStatus.completed + 1 });
   }
@@ -200,7 +210,7 @@ async function translateSelection(options = {}) {
     setStatus({ state: 'idle', completed: 1 });
     return { text, translated };
   } catch (error) {
-    const message = `Xlat unavailable locally: ${String(error?.message ?? error)}`;
+    const message = String(error?.message ?? error);
     showSelectionOverlay(message);
     setStatus({ state: 'idle', completed: 0, error: message });
     return { text, error: message };

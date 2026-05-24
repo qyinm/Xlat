@@ -151,7 +151,7 @@ translateSelectionButton.addEventListener('click', () => runCommand({
     return response.summary;
   },
   success(summary) {
-    setStatus(summary.error ? 'Selection translation unavailable locally.' : 'Selection translation shown.', summary.error ? 'error' : 'ready');
+    setStatus(summary.error ? 'Selection translation failed.' : 'Selection translation shown.', summary.error ? 'error' : 'ready');
   }
 }));
 
