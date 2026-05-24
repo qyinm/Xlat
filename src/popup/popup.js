@@ -42,7 +42,6 @@ const LANGUAGES = [
 
 const statusEl = document.querySelector('#status');
 const statusBar = document.querySelector('.status-bar');
-const outputEl = document.querySelector('#output');
 const sourceLanguageEl = document.querySelector('#sourceLanguage');
 const targetLanguageEl = document.querySelector('#targetLanguage');
 const translatePageButton = document.querySelector('#translatePage');
@@ -70,23 +69,13 @@ function setBusy(isBusy) {
   }
 }
 
-function show(value) {
-  outputEl.textContent = typeof value === 'string' ? value : JSON.stringify(value, null, 2);
-}
-
-function showSummary(title, details = {}) {
-  show({ title, ...details });
-}
-
 async function runCommand({ busyText, failureText, success, task }) {
   setBusy(true);
   setStatus(busyText, 'busy');
-  show('');
   try {
     const result = await task();
     success(result);
   } catch (error) {
-    show({ error: String(error?.message ?? error) });
     setStatus(failureText, 'error');
   } finally {
     setBusy(false);
@@ -149,7 +138,6 @@ translatePageButton.addEventListener('click', () => runCommand({
     return response.summary;
   },
   success(summary) {
-    showSummary('Page translation finished', summary);
     setStatus(`Translated ${summary.completed}/${summary.total} page blocks.`, 'ready');
   }
 }));
@@ -163,7 +151,6 @@ translateSelectionButton.addEventListener('click', () => runCommand({
     return response.summary;
   },
   success(summary) {
-    showSummary('Selection translation finished', summary);
     setStatus(summary.error ? 'Selection translation unavailable locally.' : 'Selection translation shown.', summary.error ? 'error' : 'ready');
   }
 }));
@@ -177,7 +164,6 @@ clearTranslationsButton.addEventListener('click', () => runCommand({
     return response;
   },
   success(response) {
-    showSummary('Translations cleared', response);
     setStatus(`Removed ${response.removed} Xlat nodes.`, 'ready');
   }
 }));
