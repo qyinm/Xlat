@@ -1,3 +1,15 @@
+# Build artifact (cp src/ → dist/, never loaded by Chrome)
+dist/
+
+# Chrome extension packaging
+*.crx
+*.pem
+*.zip
+
+# macOS
+.DS_Store
+
+# OMX / Codex
 .omx/
 .codex/*
 !.codex/agents/
