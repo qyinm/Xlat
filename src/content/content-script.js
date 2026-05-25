@@ -132,28 +132,132 @@ function appendTranslation(block, translatedText, { targetLanguage = 'unknown', 
   return node;
 }
 function clearTranslations() { const nodes = document.querySelectorAll('.xlat-translation,.xlat-selection-overlay'); nodes.forEach((node) => node.remove()); return nodes.length; }
+const SELECTION_OVERLAY_MARGIN = 8;
+const SELECTION_OVERLAY_GAP = 8;
+const SELECTION_OVERLAY_WIDTH = 360;
+const SELECTION_POINTER_MAX_AGE_MS = 120000;
+let lastSelectionPointer = null;
+function clamp(value, min, max) {
+  return Math.min(Math.max(value, min), Math.max(min, max));
+}
+function viewportBounds() {
+  const width = innerWidth || document.documentElement?.clientWidth || SELECTION_OVERLAY_WIDTH;
+  const height = innerHeight || document.documentElement?.clientHeight || 240;
+  return {
+    left: scrollX + SELECTION_OVERLAY_MARGIN,
+    top: scrollY + SELECTION_OVERLAY_MARGIN,
+    right: scrollX + width - SELECTION_OVERLAY_MARGIN,
+    bottom: scrollY + height - SELECTION_OVERLAY_MARGIN
+  };
+}
+function formatSelectionOverlayText(text) {
+  return String(text ?? '')
+    .replace(/\r\n?/g, '\n')
+    .split(/\n{2,}/)
+    .map((paragraph) => paragraph
+      .replace(/[ \t\f\v]+/g, ' ')
+      .replace(/([.!?。！？]+)\s+/g, '$1\n')
+      .trim())
+    .filter(Boolean)
+    .join('\n\n');
+}
+function positionSelectionOverlay(overlay, rect) {
+  const bounds = viewportBounds();
+  const selectionRight = Number.isFinite(rect.right) ? rect.right : rect.left;
+  const selectionTop = Number.isFinite(rect.top) ? rect.top : rect.bottom;
+  const left = clamp(scrollX + selectionRight + SELECTION_OVERLAY_GAP, bounds.left, bounds.right - SELECTION_OVERLAY_WIDTH);
+  const top = clamp(scrollY + selectionTop, bounds.top, bounds.bottom - 120);
+  overlay.style.left = `${left}px`;
+  overlay.style.top = `${top}px`;
+}
+function rememberSelectionPointer(event) {
+  if (event?.target?.closest?.('.xlat-selection-overlay')) return;
+  if (!Number.isFinite(event?.clientX) || !Number.isFinite(event?.clientY)) return;
+  lastSelectionPointer = { clientX: event.clientX, clientY: event.clientY, at: Date.now() };
+}
+function recentPointerRect() {
+  if (!lastSelectionPointer || Date.now() - lastSelectionPointer.at > SELECTION_POINTER_MAX_AGE_MS) return null;
+  return {
+    left: lastSelectionPointer.clientX,
+    right: lastSelectionPointer.clientX,
+    top: lastSelectionPointer.clientY,
+    bottom: lastSelectionPointer.clientY
+  };
+}
+function fallbackSelectionRect() {
+  const width = innerWidth || document.documentElement?.clientWidth || SELECTION_OVERLAY_WIDTH;
+  const height = innerHeight || document.documentElement?.clientHeight || 240;
+  const pointerRect = recentPointerRect();
+  if (pointerRect) return pointerRect;
+  return {
+    left: width - SELECTION_OVERLAY_WIDTH - SELECTION_OVERLAY_MARGIN - SELECTION_OVERLAY_GAP,
+    right: width - SELECTION_OVERLAY_WIDTH - SELECTION_OVERLAY_MARGIN - SELECTION_OVERLAY_GAP,
+    top: height * 0.35,
+    bottom: height * 0.35
+  };
+}
+function isUsableSelectionRect(rect) {
+  if (!rect) return false;
+  return [rect.left, rect.right, rect.top, rect.bottom].every(Number.isFinite) &&
+    (rect.left !== 0 || rect.right !== 0 || rect.top !== 0 || rect.bottom !== 0);
+}
+function makeSelectionOverlayDraggable(overlay, handle) {
+  handle.addEventListener('pointerdown', (event) => {
+    if (event.button !== undefined && event.button !== 0) return;
+    event.preventDefault?.();
+    handle.setPointerCapture?.(event.pointerId);
+    const startX = event.clientX;
+    const startY = event.clientY;
+    const startLeft = parseFloat(overlay.style.left) || scrollX;
+    const startTop = parseFloat(overlay.style.top) || scrollY;
+    function move(moveEvent) {
+      const bounds = viewportBounds();
+      const width = overlay.offsetWidth || SELECTION_OVERLAY_WIDTH;
+      const height = overlay.offsetHeight || 120;
+      overlay.style.left = `${clamp(startLeft + moveEvent.clientX - startX, bounds.left, bounds.right - width)}px`;
+      overlay.style.top = `${clamp(startTop + moveEvent.clientY - startY, bounds.top, bounds.bottom - height)}px`;
+    }
+    function stop() {
+      removeEventListener('pointermove', move);
+      removeEventListener('pointerup', stop);
+      removeEventListener('pointercancel', stop);
+    }
+    addEventListener('pointermove', move);
+    addEventListener('pointerup', stop, { once: true });
+    addEventListener('pointercancel', stop, { once: true });
+  });
+}
+addEventListener('pointerup', rememberSelectionPointer, true);
+addEventListener('mouseup', rememberSelectionPointer, true);
+addEventListener('contextmenu', rememberSelectionPointer, true);
 function showSelectionOverlay(text) {
   document.querySelectorAll('.xlat-selection-overlay').forEach((node) => node.remove());
   const selection = getSelection();
-  const rect = selection?.rangeCount ? selection.getRangeAt(0).getBoundingClientRect() : { left: 12, bottom: 12 };
+  const selectionRect = selection?.rangeCount ? selection.getRangeAt(0).getBoundingClientRect() : null;
+  const rect = isUsableSelectionRect(selectionRect) ? selectionRect : fallbackSelectionRect();
   const overlay = document.createElement('div');
   overlay.className = 'xlat-selection-overlay';
   overlay.dataset.xlatOwned = 'true';
 
-  const content = document.createElement('span');
+  const dragHandle = document.createElement('div');
+  dragHandle.className = 'xlat-selection-drag-handle';
+  dragHandle.setAttribute('role', 'button');
+  dragHandle.setAttribute('aria-label', 'Move translation window');
+  overlay.appendChild(dragHandle);
+
+  const content = document.createElement('div');
   content.className = 'xlat-selection-text';
-  content.textContent = text;
+  content.textContent = formatSelectionOverlayText(text);
   overlay.appendChild(content);
 
   const close = document.createElement('button');
   close.className = 'xlat-selection-close';
-  close.textContent = '\u00d7';
   close.setAttribute('aria-label', 'Close translation');
   close.addEventListener('click', () => overlay.remove());
   overlay.appendChild(close);
 
-  overlay.style.left = `${Math.max(8, rect.left + scrollX)}px`;
-  overlay.style.top = `${Math.max(8, rect.bottom + scrollY + 8)}px`;
+  makeSelectionOverlayDraggable(overlay, dragHandle);
+  positionSelectionOverlay(overlay, rect);
   document.body.appendChild(overlay);
   return overlay;
 }

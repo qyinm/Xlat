@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import vm from 'node:vm';
 import { readFile } from 'node:fs/promises';
 import { normalizeText, stableBlockId, SKIP_SELECTOR, BLOCK_SELECTOR, shouldSkipElement, collectTranslatableBlocks } from '../src/content/dom-walker.js';
-import { clearTranslations, appendTranslation, showSelectionOverlay } from '../src/content/renderer.js';
+import { clearTranslations, appendTranslation, showSelectionOverlay, formatSelectionOverlayText, rememberSelectionPointer } from '../src/content/renderer.js';
 import { ENGINE_DECISION, decideEngine } from '../src/shared/status.js';
 import { DEFAULT_SETTINGS } from '../src/shared/settings.js';
 import { MessageType } from '../src/shared/messages.js';
@@ -137,6 +137,8 @@ class RenderNode {
     this.removed = false;
     this.attributes = {};
     this.listeners = {};
+    this.offsetWidth = 360;
+    this.offsetHeight = 120;
   }
   setAttribute(name, value) {
     this.attributes[name] = String(value);
@@ -171,16 +173,28 @@ class RenderNode {
 const originalCss = globalThis.CSS;
 const originalWindow = globalThis.window;
 const originalSelection = globalThis.getSelection;
+const windowListeners = new Map();
 const renderDocument = {
   body: new RenderNode('body'),
   createElement: (tag) => new RenderNode(tag),
   querySelectorAll(selector) { return this.body.querySelectorAll(selector); }
 };
 globalThis.CSS = { escape: (value) => String(value).replace(/"/g, '\\"') };
-globalThis.window = { scrollX: 0, scrollY: 0 };
+globalThis.window = {
+  scrollX: 0,
+  scrollY: 0,
+  innerWidth: 1200,
+  innerHeight: 800,
+  addEventListener(type, listener) { windowListeners.set(type, listener); },
+  removeEventListener(type, listener) {
+    if (windowListeners.get(type) === listener) windowListeners.delete(type);
+  }
+};
 globalThis.document = renderDocument;
-globalThis.getSelection = () => ({ rangeCount: 1, getRangeAt: () => ({ getBoundingClientRect: () => ({ left: 20, bottom: 40 }) }) });
+globalThis.getSelection = () => ({ rangeCount: 1, getRangeAt: () => ({ getBoundingClientRect: () => ({ left: 20, right: 80, top: 40, bottom: 56 }) }) });
 try {
+  assert.equal(formatSelectionOverlayText('첫 문장입니다. 두 번째 문장입니다! Already wrapped.\n\nNext paragraph? Done.'), '첫 문장입니다.\n두 번째 문장입니다!\nAlready wrapped.\n\nNext paragraph?\nDone.');
+
   const parent = new RenderNode('section');
   const original = new RenderNode('p');
   original.parentElement = parent;
@@ -198,6 +212,26 @@ try {
   const overlayB = showSelectionOverlay('선택 번역 B');
   assert.notEqual(overlayA, overlayB);
   assert.equal(renderDocument.body.children.filter((child) => child.className === 'xlat-selection-overlay').length, 1);
+  assert.equal(overlayB.style.left, '88px');
+  assert.equal(overlayB.style.top, '40px');
+  assert.equal(overlayB.children.some((child) => child.className === 'xlat-selection-drag-handle'), true);
+  assert.equal(overlayB.children.find((child) => child.className === 'xlat-selection-text').textContent, '선택 번역 A'.replace('A', 'B'));
+  const dragHandle = overlayB.children.find((child) => child.className === 'xlat-selection-drag-handle');
+  dragHandle.listeners.pointerdown({ button: 0, clientX: 100, clientY: 100, pointerId: 1, preventDefault() {} });
+  windowListeners.get('pointermove')({ clientX: 130, clientY: 150 });
+  assert.equal(overlayB.style.left, '118px');
+  assert.equal(overlayB.style.top, '90px');
+
+  globalThis.getSelection = () => ({ rangeCount: 0 });
+  const fallbackOverlay = showSelectionOverlay('PDF 번역');
+  assert.equal(fallbackOverlay.style.left, '832px');
+  assert.equal(fallbackOverlay.style.top, '280px');
+
+  rememberSelectionPointer({ clientX: 520, clientY: 360, target: null });
+  const pointerFallbackOverlay = showSelectionOverlay('PDF 포인터 번역');
+  assert.equal(pointerFallbackOverlay.style.left, '528px');
+  assert.equal(pointerFallbackOverlay.style.top, '360px');
+
   assert.equal(clearTranslations(renderDocument), 2);
   assert.equal(renderDocument.body.children.length, 0);
 } finally {
