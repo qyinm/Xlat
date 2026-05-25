@@ -1,6 +1,8 @@
 import { MessageType, XLAT_CONTEXT_MENU_TRANSLATE_SELECTION } from '../shared/messages.js';
 import { loadSettings } from '../shared/settings.js';
 
+const translatedTabs = new Map();
+
 async function ensureContentScript(tabId) {
   try {
     const pong = await chrome.tabs.sendMessage(tabId, { type: MessageType.PING });
@@ -16,10 +18,25 @@ chrome.runtime.onInstalled.addListener(() => {
   chrome.contextMenus.create({ id: XLAT_CONTEXT_MENU_TRANSLATE_SELECTION, title: 'Translate selected text with Xlat', contexts: ['selection'] });
 });
 
+chrome.tabs.onUpdated.addListener((tabId) => {
+  translatedTabs.delete(tabId);
+});
+chrome.tabs.onRemoved.addListener((tabId) => {
+  translatedTabs.delete(tabId);
+});
+
 chrome.commands.onCommand.addListener(async (command) => {
   if (command !== 'translate-page') return;
   const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
   if (!tab?.id) return;
+
+  if (translatedTabs.get(tab.id)) {
+    translatedTabs.delete(tab.id);
+    await ensureContentScript(tab.id);
+    await chrome.tabs.sendMessage(tab.id, { type: MessageType.CLEAR_TRANSLATIONS });
+    return;
+  }
+
   await ensureContentScript(tab.id);
   const settings = await loadSettings();
   await chrome.tabs.sendMessage(tab.id, {
@@ -29,6 +46,7 @@ chrome.commands.onCommand.addListener(async (command) => {
     maxBlocks: settings.maxBlocks,
     viewportOnly: settings.viewportOnly,
   });
+  translatedTabs.set(tab.id, true);
 });
 
 chrome.contextMenus.onClicked.addListener(async (info, tab) => {
