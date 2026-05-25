@@ -1,4 +1,5 @@
 import { MessageType, XLAT_CONTEXT_MENU_TRANSLATE_SELECTION } from '../shared/messages.js';
+import { loadSettings } from '../shared/settings.js';
 
 async function ensureContentScript(tabId) {
   try {
@@ -13,6 +14,21 @@ async function ensureContentScript(tabId) {
 
 chrome.runtime.onInstalled.addListener(() => {
   chrome.contextMenus.create({ id: XLAT_CONTEXT_MENU_TRANSLATE_SELECTION, title: 'Translate selected text with Xlat', contexts: ['selection'] });
+});
+
+chrome.commands.onCommand.addListener(async (command) => {
+  if (command !== 'translate-page') return;
+  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+  if (!tab?.id) return;
+  await ensureContentScript(tab.id);
+  const settings = await loadSettings();
+  await chrome.tabs.sendMessage(tab.id, {
+    type: MessageType.TRANSLATE_PAGE,
+    sourceLanguage: settings.sourceLanguage,
+    targetLanguage: settings.targetLanguage,
+    maxBlocks: settings.maxBlocks,
+    viewportOnly: settings.viewportOnly,
+  });
 });
 
 chrome.contextMenus.onClicked.addListener(async (info, tab) => {

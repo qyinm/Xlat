@@ -25,6 +25,15 @@
     "48": "icons/icon-48.png",
     "128": "icons/icon-128.png"
   },
+  "commands": {
+    "translate-page": {
+      "suggested_key": {
+        "default": "Alt+A",
+        "mac": "Alt+A"
+      },
+      "description": "Translate the current page"
+    }
+  },
   "web_accessible_resources": [
     {
       "resources": [
