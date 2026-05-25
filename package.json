@@ -1,6 +1,6 @@
 {
   "name": "xlat-local-page-translator",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "private": true,
   "type": "module",
   "description": "Local-only Chrome MV3 page translator using Chrome built-in Translator API.",
