@@ -87,3 +87,19 @@
   background: #f0f0f0;
   color: #333;
 }
+
+.xlat-selection-dot {
+  position: absolute;
+  z-index: 2147483647;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #1a73e8;
+  cursor: default;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+  transition: transform 0.15s ease, opacity 0.15s ease;
+  pointer-events: auto;
+}
+.xlat-selection-dot:hover {
+  transform: scale(1.5);
+}

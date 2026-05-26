@@ -45,7 +45,6 @@ const statusBar = document.querySelector('.status-bar');
 const sourceLanguageEl = document.querySelector('#sourceLanguage');
 const targetLanguageEl = document.querySelector('#targetLanguage');
 const translatePageButton = document.querySelector('#translatePage');
-const translateSelectionButton = document.querySelector('#translateSelection');
 const clearTranslationsButton = document.querySelector('#clearTranslations');
 const displayModeEl = document.querySelector('#displayMode');
 const maxBlocksEl = document.querySelector('#maxBlocks');
@@ -64,7 +63,7 @@ function setStatus(text, state = 'ready') {
 }
 
 function setBusy(isBusy) {
-  for (const btn of [translatePageButton, translateSelectionButton, clearTranslationsButton]) {
+  for (const btn of [translatePageButton, clearTranslationsButton]) {
     btn.disabled = isBusy;
   }
 }
@@ -139,19 +138,6 @@ translatePageButton.addEventListener('click', () => runCommand({
   },
   success(summary) {
     setStatus(`Translated ${summary.completed}/${summary.total} page blocks.`, 'ready');
-  }
-}));
-
-translateSelectionButton.addEventListener('click', () => runCommand({
-  busyText: 'Translating selection...',
-  failureText: 'Selection translation failed.',
-  task: async () => {
-    const response = await sendToActiveTab({ type: MessageType.TRANSLATE_SELECTION, ...(await currentCommandOptions()) });
-    if (!response?.ok) throw new Error(response?.error || 'Selection translation failed.');
-    return response.summary;
-  },
-  success(summary) {
-    setStatus(summary.error ? 'Selection translation failed.' : 'Selection translation shown.', summary.error ? 'error' : 'ready');
   }
 }));
 

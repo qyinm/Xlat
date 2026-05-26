@@ -4,14 +4,14 @@ import { loadSettings } from '../shared/settings.js';
 const translatedTabs = new Map();
 
 async function ensureContentScript(tabId) {
-  try {
-    const pong = await chrome.tabs.sendMessage(tabId, { type: MessageType.PING });
-    if (pong?.injected) return;
-  } catch (_) {
-    // Not injected yet.
+  for (let i = 0; i < 5; i++) {
+    try {
+      const pong = await chrome.tabs.sendMessage(tabId, { type: MessageType.PING });
+      if (pong?.injected) return;
+    } catch (_) {}
+    await new Promise(r => setTimeout(r, 200));
   }
-  await chrome.scripting.executeScript({ target: { tabId }, files: ['src/content/content-script.js'] });
-  await chrome.scripting.insertCSS({ target: { tabId }, files: ['src/styles/content.css'] });
+  throw new Error('Content script not ready.');
 }
 
 chrome.runtime.onInstalled.addListener(() => {

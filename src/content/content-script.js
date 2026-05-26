@@ -131,12 +131,17 @@ function appendTranslation(block, translatedText, { targetLanguage = 'unknown', 
   if (!existing) block.element.insertAdjacentElement('afterend', node);
   return node;
 }
-function clearTranslations() { const nodes = document.querySelectorAll('.xlat-translation,.xlat-selection-overlay'); nodes.forEach((node) => node.remove()); return nodes.length; }
+function clearTranslations() { removeSelectionDot(); const nodes = document.querySelectorAll('.xlat-translation,.xlat-selection-overlay'); nodes.forEach((node) => node.remove()); return nodes.length; }
 const SELECTION_OVERLAY_MARGIN = 8;
 const SELECTION_OVERLAY_GAP = 8;
 const SELECTION_OVERLAY_WIDTH = 360;
 const SELECTION_POINTER_MAX_AGE_MS = 120000;
 let lastSelectionPointer = null;
+let selectionDot = null;
+let dotTranslateSeq = 0;
+let pendingSelectionRect = null;
+let pendingSelectionText = '';
+let lastDotSuppressedText = '';
 function clamp(value, min, max) {
   return Math.min(Math.max(value, min), Math.max(min, max));
 }
@@ -230,11 +235,79 @@ function makeSelectionOverlayDraggable(overlay, handle) {
 addEventListener('pointerup', rememberSelectionPointer, true);
 addEventListener('mouseup', rememberSelectionPointer, true);
 addEventListener('contextmenu', rememberSelectionPointer, true);
-function showSelectionOverlay(text) {
-  document.querySelectorAll('.xlat-selection-overlay').forEach((node) => node.remove());
+
+function removeSelectionDot() {
+  if (selectionDot) { selectionDot.remove(); selectionDot = null; }
+}
+function showSelectionDot() {
+  if (document.querySelector('.xlat-selection-overlay')) return;
   const selection = getSelection();
-  const selectionRect = selection?.rangeCount ? selection.getRangeAt(0).getBoundingClientRect() : null;
-  const rect = isUsableSelectionRect(selectionRect) ? selectionRect : fallbackSelectionRect();
+  const text = normalizeText(selection?.toString() || '');
+  if (!text || !selection?.rangeCount) { removeSelectionDot(); return; }
+  if (text === lastDotSuppressedText) return;
+  pendingSelectionText = text;
+  const rect = selection.getRangeAt(0).getBoundingClientRect();
+  if (isUsableSelectionRect(rect)) pendingSelectionRect = rect;
+  removeSelectionDot();
+  const dot = document.createElement('div');
+  dot.className = 'xlat-selection-dot';
+  dot.dataset.xlatOwned = 'true';
+  const viewW = innerWidth || document.documentElement?.clientWidth || 1200;
+  const viewH = innerHeight || document.documentElement?.clientHeight || 800;
+  dot.style.cssText = `position: fixed; left: ${clamp((rect.right || 0) + SELECTION_OVERLAY_GAP, 0, viewW - 16)}px; top: ${clamp((rect.top || 0) - 10, 0, viewH - 16)}px`;
+  document.body.appendChild(dot);
+  selectionDot = dot;
+  setTimeout(() => {
+    if (!selectionDot) return;
+    dot.addEventListener('mouseenter', async () => {
+      if (!pendingSelectionText) return;
+      const capturedText = pendingSelectionText;
+      const capturedRect = pendingSelectionRect;
+      removeSelectionDot();
+      lastDotSuppressedText = capturedText;
+      const seq = ++dotTranslateSeq;
+      try {
+        const { targetLanguage } = await chrome.storage.sync.get('targetLanguage');
+        const translated = await translateLocal(capturedText, { targetLanguage: targetLanguage || 'ko' });
+        if (seq !== dotTranslateSeq) return;
+        showSelectionOverlay(translated, capturedRect);
+      } catch (error) {
+        if (seq !== dotTranslateSeq) return;
+        showSelectionOverlay(String(error?.message ?? error), capturedRect);
+      }
+    });
+  }, 150);
+}
+
+function tryShowSelectionDot(e) {
+  if (e?.target?.closest?.('.xlat-selection-overlay, .xlat-selection-dot')) return;
+  showSelectionDot();
+}
+addEventListener('pointerup', tryShowSelectionDot, true);
+addEventListener('mouseup', tryShowSelectionDot, true);
+
+let selChangeTimer = null;
+if (typeof document?.addEventListener === 'function') document.addEventListener('selectionchange', () => {
+  clearTimeout(selChangeTimer);
+  selChangeTimer = setTimeout(() => {
+    const selection = getSelection();
+    const text = normalizeText(selection?.toString() || '');
+    if (!text && !document.querySelector('.xlat-selection-overlay')) {
+      removeSelectionDot();
+    }
+  }, 300);
+});
+
+function showSelectionOverlay(text, positionRect) {
+  document.querySelectorAll('.xlat-selection-overlay').forEach((node) => node.remove());
+  let rect;
+  if (positionRect && isUsableSelectionRect(positionRect)) {
+    rect = positionRect;
+  } else {
+    const selection = getSelection();
+    const selectionRect = selection?.rangeCount ? selection.getRangeAt(0).getBoundingClientRect() : null;
+    rect = isUsableSelectionRect(selectionRect) ? selectionRect : fallbackSelectionRect();
+  }
   const overlay = document.createElement('div');
   overlay.className = 'xlat-selection-overlay';
   overlay.dataset.xlatOwned = 'true';
@@ -253,11 +326,15 @@ function showSelectionOverlay(text) {
   const close = document.createElement('button');
   close.className = 'xlat-selection-close';
   close.setAttribute('aria-label', 'Close translation');
-  close.addEventListener('click', () => overlay.remove());
+  close.addEventListener('click', () => {
+    overlay.remove();
+    if (pendingSelectionText) lastDotSuppressedText = pendingSelectionText;
+    removeSelectionDot();
+  });
   overlay.appendChild(close);
 
   makeSelectionOverlayDraggable(overlay, dragHandle);
-  positionSelectionOverlay(overlay, rect);
+  if (rect) positionSelectionOverlay(overlay, rect);
   document.body.appendChild(overlay);
   return overlay;
 }
@@ -322,12 +399,12 @@ async function translateSelection(options = {}) {
   setStatus({ state: 'translating-selection', total: 1, completed: 0, error: null });
   try {
     const translated = await translateLocal(text, { targetLanguage });
-    showSelectionOverlay(translated);
+    showSelectionOverlay(translated, options.positionRect);
     setStatus({ state: 'idle', completed: 1 });
     return { text, translated };
   } catch (error) {
     const message = String(error?.message ?? error);
-    showSelectionOverlay(message);
+    showSelectionOverlay(message, options.positionRect);
     setStatus({ state: 'idle', completed: 0, error: message });
     return { text, error: message };
   }
