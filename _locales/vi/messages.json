@@ -1,0 +1,213 @@
+{
+  "appName": {
+    "message": "Xlat Dịch Trang Web Địa Phương",
+    "description": "Extension name in Chrome Web Store and toolbar"
+  },
+  "appDesc": {
+    "message": "Dịch trang và văn bản đã chọn cục bộ với API Dịch tích hợp của Chrome.",
+    "description": "Extension description in Chrome Web Store"
+  },
+  "appShortName": {
+    "message": "Xlat",
+    "description": "Short app name used in toolbar tooltip and page title"
+  },
+  "translatePage": {
+    "message": "Dịch trang",
+    "description": "Main action button in popup"
+  },
+  "clear": {
+    "message": "Xóa",
+    "description": "Button to clear all translations"
+  },
+  "ready": {
+    "message": "Sẵn sàng.",
+    "description": "Status bar default ready state text"
+  },
+  "advanced": {
+    "message": "Nâng cao",
+    "description": "Collapsible section label in popup"
+  },
+  "displayMode": {
+    "message": "Chế độ hiển thị",
+    "description": "Label for display mode dropdown"
+  },
+  "displayModeOriginalBelow": {
+    "message": "Gốc + bên dưới",
+    "description": "Display mode option showing original text with translation below"
+  },
+  "displayModeReplace": {
+    "message": "Thay thế (giai đoạn 2)",
+    "description": "Display mode option to replace text with translation"
+  },
+  "maxBlocks": {
+    "message": "Số khối tối đa",
+    "description": "Label for max blocks input"
+  },
+  "viewportOnly": {
+    "message": "Chỉ khung nhìn",
+    "description": "Checkbox label to translate only visible content"
+  },
+  "langAuto": {
+    "message": "Tự động phát hiện",
+    "description": "Language dropdown option for automatic language detection"
+  },
+  "langTl": {
+    "message": "Tiếng Philippines",
+    "description": "Language name for Tagalog/Filipino"
+  },
+  "translatingPage": {
+    "message": "Đang dịch trang...",
+    "description": "Status shown while page translation is in progress"
+  },
+  "translatedBlocks": {
+    "message": "Đã dịch $completed$/$total$ khối trang.",
+    "description": "Status after page translation completes",
+    "placeholders": {
+      "completed": { "content": "$1", "example": "42" },
+      "total": { "content": "$2", "example": "80" }
+    }
+  },
+  "pageTranslationFailed": {
+    "message": "Dịch trang thất bại.",
+    "description": "Status when page translation fails"
+  },
+  "clearingTranslations": {
+    "message": "Đang xóa bản dịch...",
+    "description": "Status shown while clearing translations"
+  },
+  "clearFailed": {
+    "message": "Xóa thất bại.",
+    "description": "Status when clearing translations fails"
+  },
+  "removedNodes": {
+    "message": "Đã xóa $removed$ nút Xlat.",
+    "description": "Status after clearing translations",
+    "placeholders": {
+      "removed": { "content": "$1", "example": "5" }
+    }
+  },
+  "noActiveTab": {
+    "message": "Không có tab đang hoạt động.",
+    "description": "Error when no active browser tab is found"
+  },
+  "contentScriptNotReady": {
+    "message": "Tập lệnh nội dung chưa sẵn sàng.",
+    "description": "Error when content script is not yet injected"
+  },
+  "optionsTitle": {
+    "message": "Tùy chọn Xlat",
+    "description": "Options page browser tab title"
+  },
+  "optionsSettings": {
+    "message": "Cài đặt Xlat",
+    "description": "Options page overline/section label"
+  },
+  "optionsHeading": {
+    "message": "Tùy chọn dịch mặc định",
+    "description": "Options page main heading"
+  },
+  "optionsDescription": {
+    "message": "Các tùy chọn mặc định này được lưu trong bộ nhớ Chrome và được popup sử dụng trước mỗi lệnh dịch cục bộ.",
+    "description": "Options page description text"
+  },
+  "defaultTargetLanguage": {
+    "message": "Ngôn ngữ đích mặc định",
+    "description": "Label for default target language input"
+  },
+  "maxBlocksPerRun": {
+    "message": "Số khối tối đa mỗi lần",
+    "description": "Label for max blocks input in options"
+  },
+  "translateViewportFirst": {
+    "message": "Dịch khung nhìn hiển thị trước",
+    "description": "Checkbox label in options"
+  },
+  "saved": {
+    "message": "Đã lưu.",
+    "description": "Status shown after saving settings"
+  },
+  "moveWindow": {
+    "message": "Di chuyển cửa sổ dịch",
+    "description": "ARIA label on the translation overlay drag handle"
+  },
+  "closeTranslation": {
+    "message": "Đóng bản dịch",
+    "description": "ARIA label on the translation overlay close button"
+  },
+  "brokerTitle": {
+    "message": "Môi giới dịch cục bộ Xlat",
+    "description": "Title attribute on the hidden broker iframe"
+  },
+  "brokerNotReady": {
+    "message": "Khung môi giới chưa sẵn sàng.",
+    "description": "Error when broker iframe fails to load"
+  },
+  "brokerTimedOut": {
+    "message": "Yêu cầu dịch của môi giới đã hết thời gian.",
+    "description": "Error when broker translation request times out"
+  },
+  "brokerFailed": {
+    "message": "Môi giới dịch thất bại.",
+    "description": "Error when broker translation fails"
+  },
+  "translationUnavailable": {
+    "message": "Không có bản dịch cho $pair$.",
+    "description": "Error when translation is unavailable for a language pair",
+    "placeholders": {
+      "pair": { "content": "$1", "example": "en->ko" }
+    }
+  },
+  "unsupportedPage": {
+    "message": "Trang không được hỗ trợ dịch tập lệnh nội dung: $url$",
+    "description": "Error when trying to translate on a restricted page",
+    "placeholders": {
+      "url": { "content": "$1", "example": "chrome://settings" }
+    }
+  },
+  "translatingTo": {
+    "message": "Đang dịch sang $language$...",
+    "description": "Loading text shown inline during block translation",
+    "placeholders": {
+      "language": { "content": "$1", "example": "ko" }
+    }
+  },
+  "noSelectedText": {
+    "message": "Không có văn bản nào được chọn để dịch.",
+    "description": "Error when no text is selected for selection translation"
+  },
+  "contextMenuTitle": {
+    "message": "Dịch văn bản đã chọn với Xlat",
+    "description": "Right-click context menu item for selected text"
+  },
+  "brokerPageTitle": {
+    "message": "Môi giới Cục bộ Xlat",
+    "description": "Broker fallback page browser tab title"
+  },
+  "brokerHeading": {
+    "message": "Môi giới Cục bộ Xlat",
+    "description": "Broker fallback page heading"
+  },
+  "brokerConnecting": {
+    "message": "Đang kết nối...",
+    "description": "Initial status shown while broker loads"
+  },
+  "brokerDescription": {
+    "message": "Trang tiện ích mở rộng này sở hữu các cuộc gọi AI tích hợp dự phòng của Chrome khi không thể thực thi tập lệnh nội dung.",
+    "description": "Broker page description text"
+  },
+  "brokerTranslating": {
+    "message": "Đang dịch $id$ cục bộ...",
+    "description": "Status shown during active broker translation",
+    "placeholders": {
+      "id": { "content": "$1", "example": "xlat-broker-5" }
+    }
+  },
+  "brokerReady": {
+    "message": "Sẵn sàng.",
+    "description": "Status when broker is ready or translation complete"
+  },
+  "translatePageShortcut": {
+    "message": "Dịch trang hiện tại",
+    "description": "Description for the keyboard shortcut in chrome://extensions/shortcuts"
+  }
+}

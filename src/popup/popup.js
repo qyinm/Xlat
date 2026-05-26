@@ -1,43 +1,65 @@
 import { MessageType } from '../shared/messages.js';
 import { loadSettings, saveSettings } from '../shared/settings.js';
 
-const LANGUAGES = [
-  { code: 'auto', label: 'Auto detect' },
-  { code: 'en', label: 'English' },
-  { code: 'ko', label: 'Korean' },
-  { code: 'ja', label: 'Japanese' },
-  { code: 'zh-Hans', label: 'Chinese (Simplified)' },
-  { code: 'zh-Hant', label: 'Chinese (Traditional)' },
-  { code: 'es', label: 'Spanish' },
-  { code: 'fr', label: 'French' },
-  { code: 'de', label: 'German' },
-  { code: 'it', label: 'Italian' },
-  { code: 'pt', label: 'Portuguese' },
-  { code: 'ru', label: 'Russian' },
-  { code: 'ar', label: 'Arabic' },
-  { code: 'vi', label: 'Vietnamese' },
-  { code: 'th', label: 'Thai' },
-  { code: 'id', label: 'Indonesian' },
-  { code: 'ms', label: 'Malay' },
-  { code: 'tl', label: 'Filipino' },
-  { code: 'hi', label: 'Hindi' },
-  { code: 'bn', label: 'Bengali' },
-  { code: 'ne', label: 'Nepali' },
-  { code: 'mn', label: 'Mongolian' },
-  { code: 'km', label: 'Khmer' },
-  { code: 'my', label: 'Burmese' },
-  { code: 'lo', label: 'Lao' },
-  { code: 'nl', label: 'Dutch' },
-  { code: 'pl', label: 'Polish' },
-  { code: 'tr', label: 'Turkish' },
-  { code: 'sv', label: 'Swedish' },
-  { code: 'da', label: 'Danish' },
-  { code: 'no', label: 'Norwegian' },
-  { code: 'fi', label: 'Finnish' },
-  { code: 'cs', label: 'Czech' },
-  { code: 'hu', label: 'Hungarian' },
-  { code: 'ro', label: 'Romanian' },
-  { code: 'uk', label: 'Ukrainian' },
+let customMessages = null;
+
+async function loadMessages(locale) {
+  if (!locale) { customMessages = null; return; }
+  try {
+    const res = await fetch(chrome.runtime.getURL(`_locales/${locale}/messages.json`));
+    const data = await res.json();
+    customMessages = {};
+    for (const [key, val] of Object.entries(data)) {
+      customMessages[key] = val.message;
+    }
+  } catch (_) { customMessages = null; }
+}
+
+function t(key, ...args) {
+  if (customMessages && customMessages[key] !== undefined) {
+    let msg = customMessages[key];
+    if (args.length) { args.forEach((arg, i) => { msg = msg.replace(`$${i + 1}`, arg); }); }
+    return msg;
+  }
+  return chrome.i18n.getMessage(key, args) || key;
+}
+
+function localizeHtml() {
+  document.querySelectorAll('[data-i18n]').forEach((el) => {
+    const key = el.getAttribute('data-i18n');
+    const msg = t(key);
+    if (el.tagName === 'LABEL' || el.tagName === 'SUMMARY') {
+      const textNode = Array.from(el.childNodes).find((n) => n.nodeType === 3 && n.textContent.trim());
+      if (textNode) textNode.textContent = ` ${msg} `;
+    } else {
+      el.textContent = msg;
+    }
+  });
+}
+
+let uiLanguageOverride = '';
+
+function uiLang() {
+  return uiLanguageOverride || chrome.i18n.getUILanguage();
+}
+
+function languageLabel(code) {
+  if (code === 'auto') return t('langAuto');
+  if (code === 'tl') return t('langTl');
+  try {
+    const name = new Intl.DisplayNames([uiLang()], { type: 'language', languageDisplay: 'standard' }).of(code);
+    return name || code;
+  } catch (_) {
+    return code;
+  }
+}
+
+const LANGUAGE_CODES = [
+  'auto', 'en', 'ko', 'ja', 'zh-Hans', 'zh-Hant',
+  'es', 'fr', 'de', 'it', 'pt', 'ru', 'ar',
+  'vi', 'th', 'id', 'ms', 'tl', 'hi', 'bn',
+  'ne', 'mn', 'km', 'my', 'lo',
+  'nl', 'pl', 'tr', 'sv', 'da', 'no', 'fi', 'cs', 'hu', 'ro', 'uk',
 ];
 
 const statusEl = document.querySelector('#status');
@@ -49,11 +71,12 @@ const clearTranslationsButton = document.querySelector('#clearTranslations');
 const displayModeEl = document.querySelector('#displayMode');
 const maxBlocksEl = document.querySelector('#maxBlocks');
 const viewportOnlyEl = document.querySelector('#viewportOnly');
+const uiLanguageEl = document.querySelector('#uiLanguage');
 const advancedDetails = document.querySelectorAll('.advanced');
 
-function populateSelect(el, languages) {
-  el.innerHTML = languages.map(l =>
-    `<option value="${l.code}">${l.label}</option>`
+function populateSelect(el) {
+  el.innerHTML = LANGUAGE_CODES.map(code =>
+    `<option value="${code}">${languageLabel(code)}</option>`
   ).join('');
 }
 
@@ -83,13 +106,13 @@ async function runCommand({ busyText, failureText, success, task }) {
 
 async function getActiveTab() {
   const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-  if (!tab?.id) throw new Error('No active tab.');
+  if (!tab?.id) throw new Error(t('noActiveTab'));
   return tab;
 }
 
 async function ensureContentScript(tabId) {
   const response = await chrome.runtime.sendMessage({ type: 'XLAT_ENSURE_CONTENT_SCRIPT', tabId });
-  if (!response?.ok) throw new Error(response?.error || 'Failed to inject content script.');
+  if (!response?.ok) throw new Error(t('contentScriptNotReady'));
 }
 
 async function currentCommandOptions() {
@@ -109,48 +132,69 @@ async function sendToActiveTab(message) {
 }
 
 async function init() {
-  populateSelect(sourceLanguageEl, LANGUAGES);
-  populateSelect(targetLanguageEl, LANGUAGES.filter(l => l.code !== 'auto'));
-
   const settings = await loadSettings();
+
+  uiLanguageOverride = settings.uiLanguage || '';
+  await loadMessages(settings.uiLanguage);
+
+  populateSelect(sourceLanguageEl);
+  populateSelect(targetLanguageEl);
+  targetLanguageEl.querySelector('[value="auto"]')?.remove();
+
   sourceLanguageEl.value = settings.sourceLanguage || 'auto';
   targetLanguageEl.value = settings.targetLanguage;
   displayModeEl.value = settings.displayMode;
   maxBlocksEl.value = settings.maxBlocks;
   viewportOnlyEl.checked = settings.viewportOnly;
+  uiLanguageEl.value = settings.uiLanguage || '';
+
+  localizeHtml();
 
   sourceLanguageEl.addEventListener('change', () => saveSettings({ sourceLanguage: sourceLanguageEl.value }));
   targetLanguageEl.addEventListener('change', () => saveSettings({ targetLanguage: targetLanguageEl.value.trim() || 'ko' }));
   displayModeEl.addEventListener('change', () => saveSettings({ displayMode: displayModeEl.value }));
   maxBlocksEl.addEventListener('change', () => saveSettings({ maxBlocks: Math.max(1, Math.min(500, Number(maxBlocksEl.value || 80))) }));
   viewportOnlyEl.addEventListener('change', () => saveSettings({ viewportOnly: Boolean(viewportOnlyEl.checked) }));
+  uiLanguageEl.addEventListener('change', async () => {
+    await saveSettings({ uiLanguage: uiLanguageEl.value });
+    uiLanguageOverride = uiLanguageEl.value;
+    await loadMessages(uiLanguageEl.value);
+    const sv = sourceLanguageEl.value;
+    const tv = targetLanguageEl.value;
+    populateSelect(sourceLanguageEl);
+    populateSelect(targetLanguageEl);
+    targetLanguageEl.querySelector('[value="auto"]')?.remove();
+    sourceLanguageEl.value = sv;
+    targetLanguageEl.value = tv;
+    localizeHtml();
+  });
 }
 
 // --- event handlers ---
 
 translatePageButton.addEventListener('click', () => runCommand({
-  busyText: 'Translating page...',
-  failureText: 'Page translation failed.',
+  busyText: t('translatingPage'),
+  failureText: t('pageTranslationFailed'),
   task: async () => {
     const response = await sendToActiveTab({ type: MessageType.TRANSLATE_PAGE, ...(await currentCommandOptions()) });
-    if (!response?.ok) throw new Error(response?.error || 'Page translation failed.');
+    if (!response?.ok) throw new Error(response?.error || t('pageTranslationFailed'));
     return response.summary;
   },
   success(summary) {
-    setStatus(`Translated ${summary.completed}/${summary.total} page blocks.`, 'ready');
+    setStatus(t('translatedBlocks', String(summary.completed), String(summary.total)), 'ready');
   }
 }));
 
 clearTranslationsButton.addEventListener('click', () => runCommand({
-  busyText: 'Clearing translations...',
-  failureText: 'Clear failed.',
+  busyText: t('clearingTranslations'),
+  failureText: t('clearFailed'),
   task: async () => {
     const response = await sendToActiveTab({ type: MessageType.CLEAR_TRANSLATIONS });
-    if (!response?.ok) throw new Error(response?.error || 'Clear failed.');
+    if (!response?.ok) throw new Error(response?.error || t('clearFailed'));
     return response;
   },
   success(response) {
-    setStatus(`Removed ${response.removed} Xlat nodes.`, 'ready');
+    setStatus(t('removedNodes', String(response.removed)), 'ready');
   }
 }));
 

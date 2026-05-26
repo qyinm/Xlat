@@ -1,0 +1,213 @@
+{
+  "appName": {
+    "message": "Xlat Helyi Oldalfordító",
+    "description": "Extension name in Chrome Web Store and toolbar"
+  },
+  "appDesc": {
+    "message": "Oldal és kijelölt szöveg helyi fordítása a Chrome beépített Fordító API-jával.",
+    "description": "Extension description in Chrome Web Store"
+  },
+  "appShortName": {
+    "message": "Xlat",
+    "description": "Short app name used in toolbar tooltip and page title"
+  },
+  "translatePage": {
+    "message": "Oldal fordítása",
+    "description": "Main action button in popup"
+  },
+  "clear": {
+    "message": "Törlés",
+    "description": "Button to clear all translations"
+  },
+  "ready": {
+    "message": "Kész.",
+    "description": "Status bar default ready state text"
+  },
+  "advanced": {
+    "message": "Speciális",
+    "description": "Collapsible section label in popup"
+  },
+  "displayMode": {
+    "message": "Megjelenítési mód",
+    "description": "Label for display mode dropdown"
+  },
+  "displayModeOriginalBelow": {
+    "message": "Eredeti + alatta",
+    "description": "Display mode option showing original text with translation below"
+  },
+  "displayModeReplace": {
+    "message": "Csere (2. fázis)",
+    "description": "Display mode option to replace text with translation"
+  },
+  "maxBlocks": {
+    "message": "Max blokkok",
+    "description": "Label for max blocks input"
+  },
+  "viewportOnly": {
+    "message": "Csak látható terület",
+    "description": "Checkbox label to translate only visible content"
+  },
+  "langAuto": {
+    "message": "Automatikus felismerés",
+    "description": "Language dropdown option for automatic language detection"
+  },
+  "langTl": {
+    "message": "Filippínó",
+    "description": "Language name for Tagalog/Filipino"
+  },
+  "translatingPage": {
+    "message": "Oldal fordítása...",
+    "description": "Status shown while page translation is in progress"
+  },
+  "translatedBlocks": {
+    "message": "$completed$/$total$ oldalblokk lefordítva.",
+    "description": "Status after page translation completes",
+    "placeholders": {
+      "completed": { "content": "$1", "example": "42" },
+      "total": { "content": "$2", "example": "80" }
+    }
+  },
+  "pageTranslationFailed": {
+    "message": "Az oldal fordítása sikertelen.",
+    "description": "Status when page translation fails"
+  },
+  "clearingTranslations": {
+    "message": "Fordítások törlése...",
+    "description": "Status shown while clearing translations"
+  },
+  "clearFailed": {
+    "message": "A törlés sikertelen.",
+    "description": "Status when clearing translations fails"
+  },
+  "removedNodes": {
+    "message": "$removed$ Xlat csomópont eltávolítva.",
+    "description": "Status after clearing translations",
+    "placeholders": {
+      "removed": { "content": "$1", "example": "5" }
+    }
+  },
+  "noActiveTab": {
+    "message": "Nincs aktív lap.",
+    "description": "Error when no active browser tab is found"
+  },
+  "contentScriptNotReady": {
+    "message": "A tartalmi szkript nem áll készen.",
+    "description": "Error when content script is not yet injected"
+  },
+  "optionsTitle": {
+    "message": "Xlat Beállítások",
+    "description": "Options page browser tab title"
+  },
+  "optionsSettings": {
+    "message": "Xlat beállítások",
+    "description": "Options page overline/section label"
+  },
+  "optionsHeading": {
+    "message": "Alapértelmezett fordítási beállítások",
+    "description": "Options page main heading"
+  },
+  "optionsDescription": {
+    "message": "Ezek az alapértelmezések a Chrome tárhelyében maradnak, és a felugró ablak használja őket minden helyi fordítási parancs előtt.",
+    "description": "Options page description text"
+  },
+  "defaultTargetLanguage": {
+    "message": "Alapértelmezett célnyelv",
+    "description": "Label for default target language input"
+  },
+  "maxBlocksPerRun": {
+    "message": "Max blokkok futásonként",
+    "description": "Label for max blocks input in options"
+  },
+  "translateViewportFirst": {
+    "message": "Látható terület fordítása először",
+    "description": "Checkbox label in options"
+  },
+  "saved": {
+    "message": "Elmentve.",
+    "description": "Status shown after saving settings"
+  },
+  "moveWindow": {
+    "message": "Fordítási ablak áthelyezése",
+    "description": "ARIA label on the translation overlay drag handle"
+  },
+  "closeTranslation": {
+    "message": "Fordítás bezárása",
+    "description": "ARIA label on the translation overlay close button"
+  },
+  "brokerTitle": {
+    "message": "Xlat helyi fordítási bróker",
+    "description": "Title attribute on the hidden broker iframe"
+  },
+  "brokerNotReady": {
+    "message": "A bróker keret nem állt készen.",
+    "description": "Error when broker iframe fails to load"
+  },
+  "brokerTimedOut": {
+    "message": "A bróker fordítási időtúllépés.",
+    "description": "Error when broker translation request times out"
+  },
+  "brokerFailed": {
+    "message": "A bróker fordítás sikertelen.",
+    "description": "Error when broker translation fails"
+  },
+  "translationUnavailable": {
+    "message": "Fordítás nem elérhető ehhez: $pair$.",
+    "description": "Error when translation is unavailable for a language pair",
+    "placeholders": {
+      "pair": { "content": "$1", "example": "en->ko" }
+    }
+  },
+  "unsupportedPage": {
+    "message": "Nem támogatott oldal a tartalmi szkript fordításához: $url$",
+    "description": "Error when trying to translate on a restricted page",
+    "placeholders": {
+      "url": { "content": "$1", "example": "chrome://settings" }
+    }
+  },
+  "translatingTo": {
+    "message": "Fordítás $language$ nyelvre...",
+    "description": "Loading text shown inline during block translation",
+    "placeholders": {
+      "language": { "content": "$1", "example": "ko" }
+    }
+  },
+  "noSelectedText": {
+    "message": "Nincs kijelölt szöveg a fordításhoz.",
+    "description": "Error when no text is selected for selection translation"
+  },
+  "contextMenuTitle": {
+    "message": "Kijelölt szöveg fordítása Xlattal",
+    "description": "Right-click context menu item for selected text"
+  },
+  "brokerPageTitle": {
+    "message": "Xlat Helyi Bróker",
+    "description": "Broker fallback page browser tab title"
+  },
+  "brokerHeading": {
+    "message": "Xlat Helyi Bróker",
+    "description": "Broker fallback page heading"
+  },
+  "brokerConnecting": {
+    "message": "Csatlakozás...",
+    "description": "Initial status shown while broker loads"
+  },
+  "brokerDescription": {
+    "message": "Ez a kiterjesztési oldal kezeli a Chrome beépített AI hívásait, ha a tartalmi szkript végrehajtása nem elérhető.",
+    "description": "Broker page description text"
+  },
+  "brokerTranslating": {
+    "message": "$id$ helyi fordítása...",
+    "description": "Status shown during active broker translation",
+    "placeholders": {
+      "id": { "content": "$1", "example": "xlat-broker-5" }
+    }
+  },
+  "brokerReady": {
+    "message": "Kész.",
+    "description": "Status when broker is ready or translation complete"
+  },
+  "translatePageShortcut": {
+    "message": "Aktuális oldal fordítása",
+    "description": "Description for the keyboard shortcut in chrome://extensions/shortcuts"
+  }
+}

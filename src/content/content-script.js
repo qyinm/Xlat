@@ -19,16 +19,41 @@ let brokerReadyPromise = null;
 let brokerSeq = 0;
 const brokerPending = new Map();
 
+let customMessages = null;
+
+async function loadMessages(locale) {
+  if (!locale) { customMessages = null; return; }
+  try {
+    const res = await fetch(chrome.runtime.getURL(`_locales/${locale}/messages.json`));
+    const data = await res.json();
+    customMessages = {};
+    for (const [key, val] of Object.entries(data)) {
+      customMessages[key] = val.message;
+    }
+  } catch (_) { customMessages = null; }
+}
+
+function t(key, ...args) {
+  if (customMessages && customMessages[key] !== undefined) {
+    let msg = customMessages[key];
+    if (args.length) args.forEach((arg, i) => { msg = msg.replace(`$${i + 1}`, arg); });
+    return msg;
+  }
+  return chrome.i18n.getMessage(key, args) || key;
+}
+
+if (chrome?.storage?.sync) chrome.storage.sync.get('uiLanguage').then(({ uiLanguage }) => loadMessages(uiLanguage));
+
 function ensureBrokerFrame() {
   if (brokerReadyPromise) return brokerReadyPromise;
   brokerReadyPromise = new Promise((resolve, reject) => {
     const frame = document.createElement('iframe');
     frame.hidden = true;
-    frame.title = 'Xlat local translation broker';
+    frame.title = t('brokerTitle');
     frame.dataset.xlatOwned = 'true';
     frame.className = 'xlat-broker-frame';
     frame.src = chrome.runtime.getURL('src/broker/broker.html');
-    const timeout = setTimeout(() => reject(new Error('Broker frame did not become ready.')), 5000);
+    const timeout = setTimeout(() => reject(new Error(t('brokerNotReady'))), 5000);
     function onMessage(event) {
       if (event.source !== frame.contentWindow) return;
       if (event.data?.type === 'XLAT_BROKER_READY') {
@@ -50,7 +75,7 @@ async function translateViaBroker(text, { targetLanguage = 'ko', sourceLanguage 
   return new Promise((resolve, reject) => {
     const timeout = setTimeout(() => {
       brokerPending.delete(id);
-      reject(new Error('Broker translation timed out.'));
+      reject(new Error(t('brokerTimedOut')));
     }, 60000);
     brokerPending.set(id, { resolve, reject, timeout });
     frame.contentWindow.postMessage({ type: 'XLAT_BROKER_TRANSLATE', id, text, sourceLanguage, targetLanguage }, '*');
@@ -67,7 +92,7 @@ addEventListener('message', (event) => {
   clearTimeout(pending.timeout);
   brokerPending.delete(message.id);
   if (message.ok) pending.resolve(message);
-  else pending.reject(new Error(message.error?.message || 'Broker translation failed.'));
+  else pending.reject(new Error(message.error?.message || t('brokerFailed')));
 });
 
 let currentStatus = { state: 'idle', completed: 0, total: 0, error: null };
@@ -315,7 +340,7 @@ function showSelectionOverlay(text, positionRect) {
   const dragHandle = document.createElement('div');
   dragHandle.className = 'xlat-selection-drag-handle';
   dragHandle.setAttribute('role', 'button');
-  dragHandle.setAttribute('aria-label', 'Move translation window');
+  dragHandle.setAttribute('aria-label', t('moveWindow'));
   overlay.appendChild(dragHandle);
 
   const content = document.createElement('div');
@@ -325,7 +350,7 @@ function showSelectionOverlay(text, positionRect) {
 
   const close = document.createElement('button');
   close.className = 'xlat-selection-close';
-  close.setAttribute('aria-label', 'Close translation');
+  close.setAttribute('aria-label', t('closeTranslation'));
   close.addEventListener('click', () => {
     overlay.remove();
     if (pendingSelectionText) lastDotSuppressedText = pendingSelectionText;
@@ -358,7 +383,7 @@ async function translateLocal(text, { targetLanguage = 'ko', sourceLanguage } = 
   let translator = translatorCache.get(key);
   if (!translator) {
     const availability = await globalThis.Translator.availability({ sourceLanguage: source, targetLanguage });
-    if (availability === 'unavailable') throw new Error(`Translation unavailable for ${key}.`);
+    if (availability === 'unavailable') throw new Error(t('translationUnavailable', key));
     try {
       translator = await globalThis.Translator.create({ sourceLanguage: source, targetLanguage });
     } catch (createError) {
@@ -375,13 +400,13 @@ async function translateLocal(text, { targetLanguage = 'ko', sourceLanguage } = 
   return translator.translate(text);
 }
 async function translatePage(options = {}) {
-  if (isRestrictedPage()) throw new Error(`Unsupported page for content script translation: ${location.href}`);
+  if (isRestrictedPage()) throw new Error(t('unsupportedPage', location.href));
   const targetLanguage = options.targetLanguage || 'ko';
   const blocks = collectBlocks({ maxBlocks: options.maxBlocks || 80, viewportOnly: Boolean(options.viewportOnly) });
   setStatus({ state: 'translating-page', completed: 0, total: blocks.length, error: null });
   for (const block of blocks) {
     try {
-      appendTranslation(block, `Translating to ${targetLanguage}...`, { targetLanguage, status: 'loading' });
+      appendTranslation(block, t('translatingTo', targetLanguage), { targetLanguage, status: 'loading' });
       const translated = await translateLocal(block.text, { targetLanguage });
       appendTranslation(block, translated, { targetLanguage, status: 'translated' });
     } catch (error) {
@@ -394,7 +419,7 @@ async function translatePage(options = {}) {
 }
 async function translateSelection(options = {}) {
   const text = normalizeText(options.text || getSelection()?.toString() || '');
-  if (!text) throw new Error('No selected text to translate.');
+  if (!text) throw new Error(t('noSelectedText'));
   const targetLanguage = options.targetLanguage || 'ko';
   setStatus({ state: 'translating-selection', total: 1, completed: 0, error: null });
   try {

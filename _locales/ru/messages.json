@@ -1,0 +1,213 @@
+{
+  "appName": {
+    "message": "Xlat Локальный переводчик страниц",
+    "description": "Extension name in Chrome Web Store and toolbar"
+  },
+  "appDesc": {
+    "message": "Переводите страницы и выделенный текст локально с помощью встроенного API переводчика Chrome.",
+    "description": "Extension description in Chrome Web Store"
+  },
+  "appShortName": {
+    "message": "Xlat",
+    "description": "Short app name used in toolbar tooltip and page title"
+  },
+  "translatePage": {
+    "message": "Перевести страницу",
+    "description": "Main action button in popup"
+  },
+  "clear": {
+    "message": "Очистить",
+    "description": "Button to clear all translations"
+  },
+  "ready": {
+    "message": "Готово.",
+    "description": "Status bar default ready state text"
+  },
+  "advanced": {
+    "message": "Дополнительно",
+    "description": "Collapsible section label in popup"
+  },
+  "displayMode": {
+    "message": "Режим отображения",
+    "description": "Label for display mode dropdown"
+  },
+  "displayModeOriginalBelow": {
+    "message": "Оригинал + снизу",
+    "description": "Display mode option showing original text with translation below"
+  },
+  "displayModeReplace": {
+    "message": "Замена (фаза 2)",
+    "description": "Display mode option to replace text with translation"
+  },
+  "maxBlocks": {
+    "message": "Макс. блоков",
+    "description": "Label for max blocks input"
+  },
+  "viewportOnly": {
+    "message": "Только видимая область",
+    "description": "Checkbox label to translate only visible content"
+  },
+  "langAuto": {
+    "message": "Автоопределение",
+    "description": "Language dropdown option for automatic language detection"
+  },
+  "langTl": {
+    "message": "Филиппинский",
+    "description": "Language name for Tagalog/Filipino"
+  },
+  "translatingPage": {
+    "message": "Перевод страницы...",
+    "description": "Status shown while page translation is in progress"
+  },
+  "translatedBlocks": {
+    "message": "Переведено $completed$/$total$ блоков страницы.",
+    "description": "Status after page translation completes",
+    "placeholders": {
+      "completed": { "content": "$1", "example": "42" },
+      "total": { "content": "$2", "example": "80" }
+    }
+  },
+  "pageTranslationFailed": {
+    "message": "Перевод страницы не удался.",
+    "description": "Status when page translation fails"
+  },
+  "clearingTranslations": {
+    "message": "Очистка перевода...",
+    "description": "Status shown while clearing translations"
+  },
+  "clearFailed": {
+    "message": "Очистка не удалась.",
+    "description": "Status when clearing translations fails"
+  },
+  "removedNodes": {
+    "message": "Удалено $removed$ узлов Xlat.",
+    "description": "Status after clearing translations",
+    "placeholders": {
+      "removed": { "content": "$1", "example": "5" }
+    }
+  },
+  "noActiveTab": {
+    "message": "Нет активной вкладки.",
+    "description": "Error when no active browser tab is found"
+  },
+  "contentScriptNotReady": {
+    "message": "Скрипт контента не готов.",
+    "description": "Error when content script is not yet injected"
+  },
+  "optionsTitle": {
+    "message": "Настройки Xlat",
+    "description": "Options page browser tab title"
+  },
+  "optionsSettings": {
+    "message": "Настройки Xlat",
+    "description": "Options page overline/section label"
+  },
+  "optionsHeading": {
+    "message": "Стандартные настройки перевода",
+    "description": "Options page main heading"
+  },
+  "optionsDescription": {
+    "message": "Эти настройки по умолчанию хранятся в Chrome storage и используются всплывающей панелью перед каждой командой локального перевода.",
+    "description": "Options page description text"
+  },
+  "defaultTargetLanguage": {
+    "message": "Язык перевода по умолчанию",
+    "description": "Label for default target language input"
+  },
+  "maxBlocksPerRun": {
+    "message": "Макс. блоков за запуск",
+    "description": "Label for max blocks input in options"
+  },
+  "translateViewportFirst": {
+    "message": "Сначала переводить видимую область",
+    "description": "Checkbox label in options"
+  },
+  "saved": {
+    "message": "Сохранено.",
+    "description": "Status shown after saving settings"
+  },
+  "moveWindow": {
+    "message": "Переместить окно перевода",
+    "description": "ARIA label on the translation overlay drag handle"
+  },
+  "closeTranslation": {
+    "message": "Закрыть перевод",
+    "description": "ARIA label on the translation overlay close button"
+  },
+  "brokerTitle": {
+    "message": "Локальный брокер перевода Xlat",
+    "description": "Title attribute on the hidden broker iframe"
+  },
+  "brokerNotReady": {
+    "message": "Фрейм брокера не стал готовым.",
+    "description": "Error when broker iframe fails to load"
+  },
+  "brokerTimedOut": {
+    "message": "Тайм-аут перевода брокера.",
+    "description": "Error when broker translation request times out"
+  },
+  "brokerFailed": {
+    "message": "Перевод брокера не удался.",
+    "description": "Error when broker translation fails"
+  },
+  "translationUnavailable": {
+    "message": "Перевод недоступен для $pair$.",
+    "description": "Error when translation is unavailable for a language pair",
+    "placeholders": {
+      "pair": { "content": "$1", "example": "en->ko" }
+    }
+  },
+  "unsupportedPage": {
+    "message": "Неподдерживаемая страница для перевода скриптом контента: $url$",
+    "description": "Error when trying to translate on a restricted page",
+    "placeholders": {
+      "url": { "content": "$1", "example": "chrome://settings" }
+    }
+  },
+  "translatingTo": {
+    "message": "Перевод на $language$...",
+    "description": "Loading text shown inline during block translation",
+    "placeholders": {
+      "language": { "content": "$1", "example": "ko" }
+    }
+  },
+  "noSelectedText": {
+    "message": "Нет выделенного текста для перевода.",
+    "description": "Error when no text is selected for selection translation"
+  },
+  "contextMenuTitle": {
+    "message": "Перевести выделенный текст с помощью Xlat",
+    "description": "Right-click context menu item for selected text"
+  },
+  "brokerPageTitle": {
+    "message": "Локальный брокер Xlat",
+    "description": "Broker fallback page browser tab title"
+  },
+  "brokerHeading": {
+    "message": "Локальный брокер Xlat",
+    "description": "Broker fallback page heading"
+  },
+  "brokerConnecting": {
+    "message": "Подключение...",
+    "description": "Initial status shown while broker loads"
+  },
+  "brokerDescription": {
+    "message": "Эта страница расширения обрабатывает резервные вызовы встроенного ИИ Chrome, когда выполнение скрипта контента недоступно.",
+    "description": "Broker page description text"
+  },
+  "brokerTranslating": {
+    "message": "Локальный перевод $id$...",
+    "description": "Status shown during active broker translation",
+    "placeholders": {
+      "id": { "content": "$1", "example": "xlat-broker-5" }
+    }
+  },
+  "brokerReady": {
+    "message": "Готово.",
+    "description": "Status when broker is ready or translation complete"
+  },
+  "translatePageShortcut": {
+    "message": "Перевести текущую страницу",
+    "description": "Description for the keyboard shortcut in chrome://extensions/shortcuts"
+  }
+}

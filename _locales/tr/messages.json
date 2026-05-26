@@ -1,0 +1,213 @@
+{
+  "appName": {
+    "message": "Xlat Yerel Sayfa Çevirici",
+    "description": "Extension name in Chrome Web Store and toolbar"
+  },
+  "appDesc": {
+    "message": "Chrome yerleşik Çevirmen API'si ile sayfayı ve seçili metni yerel olarak çevir.",
+    "description": "Extension description in Chrome Web Store"
+  },
+  "appShortName": {
+    "message": "Xlat",
+    "description": "Short app name used in toolbar tooltip and page title"
+  },
+  "translatePage": {
+    "message": "Sayfayı çevir",
+    "description": "Main action button in popup"
+  },
+  "clear": {
+    "message": "Temizle",
+    "description": "Button to clear all translations"
+  },
+  "ready": {
+    "message": "Hazır.",
+    "description": "Status bar default ready state text"
+  },
+  "advanced": {
+    "message": "Gelişmiş",
+    "description": "Collapsible section label in popup"
+  },
+  "displayMode": {
+    "message": "Görüntüleme modu",
+    "description": "Label for display mode dropdown"
+  },
+  "displayModeOriginalBelow": {
+    "message": "Orijinal + altı",
+    "description": "Display mode option showing original text with translation below"
+  },
+  "displayModeReplace": {
+    "message": "Değiştir (2. aşama)",
+    "description": "Display mode option to replace text with translation"
+  },
+  "maxBlocks": {
+    "message": "Maks. blok",
+    "description": "Label for max blocks input"
+  },
+  "viewportOnly": {
+    "message": "Yalnızca görünen alan",
+    "description": "Checkbox label to translate only visible content"
+  },
+  "langAuto": {
+    "message": "Otomatik algıla",
+    "description": "Language dropdown option for automatic language detection"
+  },
+  "langTl": {
+    "message": "Filipince",
+    "description": "Language name for Tagalog/Filipino"
+  },
+  "translatingPage": {
+    "message": "Sayfa çevriliyor...",
+    "description": "Status shown while page translation is in progress"
+  },
+  "translatedBlocks": {
+    "message": "$completed$/$total$ sayfa bloğu çevrildi.",
+    "description": "Status after page translation completes",
+    "placeholders": {
+      "completed": { "content": "$1", "example": "42" },
+      "total": { "content": "$2", "example": "80" }
+    }
+  },
+  "pageTranslationFailed": {
+    "message": "Sayfa çevirisi başarısız oldu.",
+    "description": "Status when page translation fails"
+  },
+  "clearingTranslations": {
+    "message": "Çeviriler temizleniyor...",
+    "description": "Status shown while clearing translations"
+  },
+  "clearFailed": {
+    "message": "Temizleme başarısız oldu.",
+    "description": "Status when clearing translations fails"
+  },
+  "removedNodes": {
+    "message": "$removed$ Xlat düğümü kaldırıldı.",
+    "description": "Status after clearing translations",
+    "placeholders": {
+      "removed": { "content": "$1", "example": "5" }
+    }
+  },
+  "noActiveTab": {
+    "message": "Aktif sekme yok.",
+    "description": "Error when no active browser tab is found"
+  },
+  "contentScriptNotReady": {
+    "message": "İçerik betiği hazır değil.",
+    "description": "Error when content script is not yet injected"
+  },
+  "optionsTitle": {
+    "message": "Xlat Ayarları",
+    "description": "Options page browser tab title"
+  },
+  "optionsSettings": {
+    "message": "Xlat ayarları",
+    "description": "Options page overline/section label"
+  },
+  "optionsHeading": {
+    "message": "Varsayılan çeviri tercihleri",
+    "description": "Options page main heading"
+  },
+  "optionsDescription": {
+    "message": "Bu varsayılanlar Chrome depolamasında kalır ve her yerel çeviri komutundan önce açılır pencere tarafından kullanılır.",
+    "description": "Options page description text"
+  },
+  "defaultTargetLanguage": {
+    "message": "Varsayılan hedef dil",
+    "description": "Label for default target language input"
+  },
+  "maxBlocksPerRun": {
+    "message": "Çalışma başına maks. blok",
+    "description": "Label for max blocks input in options"
+  },
+  "translateViewportFirst": {
+    "message": "Önce görünen alanı çevir",
+    "description": "Checkbox label in options"
+  },
+  "saved": {
+    "message": "Kaydedildi.",
+    "description": "Status shown after saving settings"
+  },
+  "moveWindow": {
+    "message": "Çeviri penceresini taşı",
+    "description": "ARIA label on the translation overlay drag handle"
+  },
+  "closeTranslation": {
+    "message": "Çeviriyi kapat",
+    "description": "ARIA label on the translation overlay close button"
+  },
+  "brokerTitle": {
+    "message": "Xlat yerel çeviri aracısı",
+    "description": "Title attribute on the hidden broker iframe"
+  },
+  "brokerNotReady": {
+    "message": "Aracı çerçevesi hazır hale gelmedi.",
+    "description": "Error when broker iframe fails to load"
+  },
+  "brokerTimedOut": {
+    "message": "Aracı çevirisi zaman aşımına uğradı.",
+    "description": "Error when broker translation request times out"
+  },
+  "brokerFailed": {
+    "message": "Aracı çevirisi başarısız oldu.",
+    "description": "Error when broker translation fails"
+  },
+  "translationUnavailable": {
+    "message": "$pair$ için çeviri kullanılamıyor.",
+    "description": "Error when translation is unavailable for a language pair",
+    "placeholders": {
+      "pair": { "content": "$1", "example": "en->ko" }
+    }
+  },
+  "unsupportedPage": {
+    "message": "İçerik betiği çevirisi için desteklenmeyen sayfa: $url$",
+    "description": "Error when trying to translate on a restricted page",
+    "placeholders": {
+      "url": { "content": "$1", "example": "chrome://settings" }
+    }
+  },
+  "translatingTo": {
+    "message": "$language$ diline çevriliyor...",
+    "description": "Loading text shown inline during block translation",
+    "placeholders": {
+      "language": { "content": "$1", "example": "ko" }
+    }
+  },
+  "noSelectedText": {
+    "message": "Çevrilecek seçili metin yok.",
+    "description": "Error when no text is selected for selection translation"
+  },
+  "contextMenuTitle": {
+    "message": "Xlat ile seçili metni çevir",
+    "description": "Right-click context menu item for selected text"
+  },
+  "brokerPageTitle": {
+    "message": "Xlat Yerel Aracısı",
+    "description": "Broker fallback page browser tab title"
+  },
+  "brokerHeading": {
+    "message": "Xlat Yerel Aracısı",
+    "description": "Broker fallback page heading"
+  },
+  "brokerConnecting": {
+    "message": "Bağlanıyor...",
+    "description": "Initial status shown while broker loads"
+  },
+  "brokerDescription": {
+    "message": "Bu eklenti sayfası, içerik betiği yürütmesi kullanılamadığında yedek Chrome yerleşik AI çağrılarını yönetir.",
+    "description": "Broker page description text"
+  },
+  "brokerTranslating": {
+    "message": "$id$ yerel olarak çevriliyor...",
+    "description": "Status shown during active broker translation",
+    "placeholders": {
+      "id": { "content": "$1", "example": "xlat-broker-5" }
+    }
+  },
+  "brokerReady": {
+    "message": "Hazır.",
+    "description": "Status when broker is ready or translation complete"
+  },
+  "translatePageShortcut": {
+    "message": "Geçerli sayfayı çevir",
+    "description": "Description for the keyboard shortcut in chrome://extensions/shortcuts"
+  }
+}

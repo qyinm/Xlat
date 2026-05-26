@@ -1,0 +1,213 @@
+{
+  "appName": {
+    "message": "Xlat Локальний перекладач сторінок",
+    "description": "Extension name in Chrome Web Store and toolbar"
+  },
+  "appDesc": {
+    "message": "Перекладайте сторінку та виділений текст локально за допомогою Chrome вбудованого API перекладача.",
+    "description": "Extension description in Chrome Web Store"
+  },
+  "appShortName": {
+    "message": "Xlat",
+    "description": "Short app name used in toolbar tooltip and page title"
+  },
+  "translatePage": {
+    "message": "Перекласти сторінку",
+    "description": "Main action button in popup"
+  },
+  "clear": {
+    "message": "Очистити",
+    "description": "Button to clear all translations"
+  },
+  "ready": {
+    "message": "Готово.",
+    "description": "Status bar default ready state text"
+  },
+  "advanced": {
+    "message": "Розширені",
+    "description": "Collapsible section label in popup"
+  },
+  "displayMode": {
+    "message": "Режим відображення",
+    "description": "Label for display mode dropdown"
+  },
+  "displayModeOriginalBelow": {
+    "message": "Оригінал + знизу",
+    "description": "Display mode option showing original text with translation below"
+  },
+  "displayModeReplace": {
+    "message": "Замінити (фаза 2)",
+    "description": "Display mode option to replace text with translation"
+  },
+  "maxBlocks": {
+    "message": "Макс. блоків",
+    "description": "Label for max blocks input"
+  },
+  "viewportOnly": {
+    "message": "Тільки видима область",
+    "description": "Checkbox label to translate only visible content"
+  },
+  "langAuto": {
+    "message": "Автовизначення",
+    "description": "Language dropdown option for automatic language detection"
+  },
+  "langTl": {
+    "message": "Філіппінська",
+    "description": "Language name for Tagalog/Filipino"
+  },
+  "translatingPage": {
+    "message": "Переклад сторінки...",
+    "description": "Status shown while page translation is in progress"
+  },
+  "translatedBlocks": {
+    "message": "Перекладено $completed$/$total$ блоків сторінки.",
+    "description": "Status after page translation completes",
+    "placeholders": {
+      "completed": { "content": "$1", "example": "42" },
+      "total": { "content": "$2", "example": "80" }
+    }
+  },
+  "pageTranslationFailed": {
+    "message": "Не вдалося перекласти сторінку.",
+    "description": "Status when page translation fails"
+  },
+  "clearingTranslations": {
+    "message": "Очищення перекладів...",
+    "description": "Status shown while clearing translations"
+  },
+  "clearFailed": {
+    "message": "Не вдалося очистити.",
+    "description": "Status when clearing translations fails"
+  },
+  "removedNodes": {
+    "message": "Видалено $removed$ вузлів Xlat.",
+    "description": "Status after clearing translations",
+    "placeholders": {
+      "removed": { "content": "$1", "example": "5" }
+    }
+  },
+  "noActiveTab": {
+    "message": "Немає активної вкладки.",
+    "description": "Error when no active browser tab is found"
+  },
+  "contentScriptNotReady": {
+    "message": "Сценарій вмісту ще не готовий.",
+    "description": "Error when content script is not yet injected"
+  },
+  "optionsTitle": {
+    "message": "Налаштування Xlat",
+    "description": "Options page browser tab title"
+  },
+  "optionsSettings": {
+    "message": "Налаштування Xlat",
+    "description": "Options page overline/section label"
+  },
+  "optionsHeading": {
+    "message": "Стандартні налаштування перекладу",
+    "description": "Options page main heading"
+  },
+  "optionsDescription": {
+    "message": "Ці налаштування за замовчуванням зберігаються в Chrome storage та використовуються спливаючою панеллю перед кожною командою локального перекладу.",
+    "description": "Options page description text"
+  },
+  "defaultTargetLanguage": {
+    "message": "Мова перекладу за замовчуванням",
+    "description": "Label for default target language input"
+  },
+  "maxBlocksPerRun": {
+    "message": "Макс. блоків за запуск",
+    "description": "Label for max blocks input in options"
+  },
+  "translateViewportFirst": {
+    "message": "Спочатку перекладати видиму область",
+    "description": "Checkbox label in options"
+  },
+  "saved": {
+    "message": "Збережено.",
+    "description": "Status shown after saving settings"
+  },
+  "moveWindow": {
+    "message": "Перемістити вікно перекладу",
+    "description": "ARIA label on the translation overlay drag handle"
+  },
+  "closeTranslation": {
+    "message": "Закрити переклад",
+    "description": "ARIA label on the translation overlay close button"
+  },
+  "brokerTitle": {
+    "message": "Xlat локальний брокер перекладу",
+    "description": "Title attribute on the hidden broker iframe"
+  },
+  "brokerNotReady": {
+    "message": "Фрейм брокера не став готовим.",
+    "description": "Error when broker iframe fails to load"
+  },
+  "brokerTimedOut": {
+    "message": "Час очікування перекладу брокера вичерпано.",
+    "description": "Error when broker translation request times out"
+  },
+  "brokerFailed": {
+    "message": "Не вдалося виконати переклад брокера.",
+    "description": "Error when broker translation fails"
+  },
+  "translationUnavailable": {
+    "message": "Переклад недоступний для $pair$.",
+    "description": "Error when translation is unavailable for a language pair",
+    "placeholders": {
+      "pair": { "content": "$1", "example": "en->ko" }
+    }
+  },
+  "unsupportedPage": {
+    "message": "Сторінка не підтримує переклад сценарієм вмісту: $url$",
+    "description": "Error when trying to translate on a restricted page",
+    "placeholders": {
+      "url": { "content": "$1", "example": "chrome://settings" }
+    }
+  },
+  "translatingTo": {
+    "message": "Переклад на $language$...",
+    "description": "Loading text shown inline during block translation",
+    "placeholders": {
+      "language": { "content": "$1", "example": "ko" }
+    }
+  },
+  "noSelectedText": {
+    "message": "Немає виділеного тексту для перекладу.",
+    "description": "Error when no text is selected for selection translation"
+  },
+  "contextMenuTitle": {
+    "message": "Перекласти виділений текст за допомогою Xlat",
+    "description": "Right-click context menu item for selected text"
+  },
+  "brokerPageTitle": {
+    "message": "Xlat Локальний Брокер",
+    "description": "Broker fallback page browser tab title"
+  },
+  "brokerHeading": {
+    "message": "Xlat Локальний Брокер",
+    "description": "Broker fallback page heading"
+  },
+  "brokerConnecting": {
+    "message": "Підключення...",
+    "description": "Initial status shown while broker loads"
+  },
+  "brokerDescription": {
+    "message": "Ця сторінка розширення керує резервними вбудованими викликами Chrome AI, коли виконання сценарію вмісту недоступне.",
+    "description": "Broker page description text"
+  },
+  "brokerTranslating": {
+    "message": "Локальний переклад $id$...",
+    "description": "Status shown during active broker translation",
+    "placeholders": {
+      "id": { "content": "$1", "example": "xlat-broker-5" }
+    }
+  },
+  "brokerReady": {
+    "message": "Готово.",
+    "description": "Status when broker is ready or translation complete"
+  },
+  "translatePageShortcut": {
+    "message": "Перекласти поточну сторінку",
+    "description": "Description for the keyboard shortcut in chrome://extensions/shortcuts"
+  }
+}

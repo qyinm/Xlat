@@ -4,7 +4,8 @@ export const DEFAULT_SETTINGS = Object.freeze({
   displayMode: 'append-below-original',
   maxBlocks: 80,
   viewportOnly: false,
-  includeCode: false
+  includeCode: false,
+  uiLanguage: ''
 });
 
 export async function loadSettings() {

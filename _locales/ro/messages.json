@@ -1,0 +1,213 @@
+{
+  "appName": {
+    "message": "Xlat Traducător Local de Pagini",
+    "description": "Extension name in Chrome Web Store and toolbar"
+  },
+  "appDesc": {
+    "message": "Traduce pagina și textul selectat local cu API-ul de traducere încorporat al Chrome.",
+    "description": "Extension description in Chrome Web Store"
+  },
+  "appShortName": {
+    "message": "Xlat",
+    "description": "Short app name used in toolbar tooltip and page title"
+  },
+  "translatePage": {
+    "message": "Tradu pagina",
+    "description": "Main action button in popup"
+  },
+  "clear": {
+    "message": "Curăță",
+    "description": "Button to clear all translations"
+  },
+  "ready": {
+    "message": "Pregătit.",
+    "description": "Status bar default ready state text"
+  },
+  "advanced": {
+    "message": "Avansat",
+    "description": "Collapsible section label in popup"
+  },
+  "displayMode": {
+    "message": "Mod de afișare",
+    "description": "Label for display mode dropdown"
+  },
+  "displayModeOriginalBelow": {
+    "message": "Original + dedesubt",
+    "description": "Display mode option showing original text with translation below"
+  },
+  "displayModeReplace": {
+    "message": "Înlocuiește (faza 2)",
+    "description": "Display mode option to replace text with translation"
+  },
+  "maxBlocks": {
+    "message": "Blocuri maxime",
+    "description": "Label for max blocks input"
+  },
+  "viewportOnly": {
+    "message": "Doar viewport",
+    "description": "Checkbox label to translate only visible content"
+  },
+  "langAuto": {
+    "message": "Detectare automată",
+    "description": "Language dropdown option for automatic language detection"
+  },
+  "langTl": {
+    "message": "Filipineză",
+    "description": "Language name for Tagalog/Filipino"
+  },
+  "translatingPage": {
+    "message": "Se traduce pagina...",
+    "description": "Status shown while page translation is in progress"
+  },
+  "translatedBlocks": {
+    "message": "S-au tradus $completed$/$total$ blocuri ale paginii.",
+    "description": "Status after page translation completes",
+    "placeholders": {
+      "completed": { "content": "$1", "example": "42" },
+      "total": { "content": "$2", "example": "80" }
+    }
+  },
+  "pageTranslationFailed": {
+    "message": "Traducerea paginii a eșuat.",
+    "description": "Status when page translation fails"
+  },
+  "clearingTranslations": {
+    "message": "Se curăță traducerile...",
+    "description": "Status shown while clearing translations"
+  },
+  "clearFailed": {
+    "message": "Curățarea a eșuat.",
+    "description": "Status when clearing translations fails"
+  },
+  "removedNodes": {
+    "message": "S-au eliminat $removed$ noduri Xlat.",
+    "description": "Status after clearing translations",
+    "placeholders": {
+      "removed": { "content": "$1", "example": "5" }
+    }
+  },
+  "noActiveTab": {
+    "message": "Nicio filă activă.",
+    "description": "Error when no active browser tab is found"
+  },
+  "contentScriptNotReady": {
+    "message": "Scriptul de conținut nu este pregătit.",
+    "description": "Error when content script is not yet injected"
+  },
+  "optionsTitle": {
+    "message": "Opțiuni Xlat",
+    "description": "Options page browser tab title"
+  },
+  "optionsSettings": {
+    "message": "Setări Xlat",
+    "description": "Options page overline/section label"
+  },
+  "optionsHeading": {
+    "message": "Preferințe implicite de traducere",
+    "description": "Options page main heading"
+  },
+  "optionsDescription": {
+    "message": "Aceste valori implicite rămân în stocarea Chrome și sunt folosite de popup înainte de fiecare comandă de traducere locală.",
+    "description": "Options page description text"
+  },
+  "defaultTargetLanguage": {
+    "message": "Limba țintă implicită",
+    "description": "Label for default target language input"
+  },
+  "maxBlocksPerRun": {
+    "message": "Blocuri maxime per execuție",
+    "description": "Label for max blocks input in options"
+  },
+  "translateViewportFirst": {
+    "message": "Traduce mai întâi viewportul vizibil",
+    "description": "Checkbox label in options"
+  },
+  "saved": {
+    "message": "Salvat.",
+    "description": "Status shown after saving settings"
+  },
+  "moveWindow": {
+    "message": "Mută fereastra de traducere",
+    "description": "ARIA label on the translation overlay drag handle"
+  },
+  "closeTranslation": {
+    "message": "Închide traducerea",
+    "description": "ARIA label on the translation overlay close button"
+  },
+  "brokerTitle": {
+    "message": "Broker local de traducere Xlat",
+    "description": "Title attribute on the hidden broker iframe"
+  },
+  "brokerNotReady": {
+    "message": "Cadrul brokerului nu a devenit pregătit.",
+    "description": "Error when broker iframe fails to load"
+  },
+  "brokerTimedOut": {
+    "message": "Traducerea brokerului a expirat.",
+    "description": "Error when broker translation request times out"
+  },
+  "brokerFailed": {
+    "message": "Traducerea brokerului a eșuat.",
+    "description": "Error when broker translation fails"
+  },
+  "translationUnavailable": {
+    "message": "Traducere indisponibilă pentru $pair$.",
+    "description": "Error when translation is unavailable for a language pair",
+    "placeholders": {
+      "pair": { "content": "$1", "example": "en->ko" }
+    }
+  },
+  "unsupportedPage": {
+    "message": "Pagină neacceptată pentru traducerea cu script de conținut: $url$",
+    "description": "Error when trying to translate on a restricted page",
+    "placeholders": {
+      "url": { "content": "$1", "example": "chrome://settings" }
+    }
+  },
+  "translatingTo": {
+    "message": "Se traduce în $language$...",
+    "description": "Loading text shown inline during block translation",
+    "placeholders": {
+      "language": { "content": "$1", "example": "ko" }
+    }
+  },
+  "noSelectedText": {
+    "message": "Niciun text selectat de tradus.",
+    "description": "Error when no text is selected for selection translation"
+  },
+  "contextMenuTitle": {
+    "message": "Traduce textul selectat cu Xlat",
+    "description": "Right-click context menu item for selected text"
+  },
+  "brokerPageTitle": {
+    "message": "Broker Local Xlat",
+    "description": "Broker fallback page browser tab title"
+  },
+  "brokerHeading": {
+    "message": "Broker Local Xlat",
+    "description": "Broker fallback page heading"
+  },
+  "brokerConnecting": {
+    "message": "Se conectează...",
+    "description": "Initial status shown while broker loads"
+  },
+  "brokerDescription": {
+    "message": "Această pagină a extensiei gestionează apelurile de rezervă ale AI-ului încorporat în Chrome când execuția scriptului de conținut este indisponibilă.",
+    "description": "Broker page description text"
+  },
+  "brokerTranslating": {
+    "message": "Se traduce $id$ local...",
+    "description": "Status shown during active broker translation",
+    "placeholders": {
+      "id": { "content": "$1", "example": "xlat-broker-5" }
+    }
+  },
+  "brokerReady": {
+    "message": "Pregătit.",
+    "description": "Status when broker is ready or translation complete"
+  },
+  "translatePageShortcut": {
+    "message": "Traduce pagina curentă",
+    "description": "Description for the keyboard shortcut in chrome://extensions/shortcuts"
+  }
+}

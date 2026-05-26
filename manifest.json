@@ -1,8 +1,9 @@
 {
   "manifest_version": 3,
-  "name": "Xlat Local Page Translator",
+  "name": "__MSG_appName__",
   "version": "0.2.1",
-  "description": "Translate page and selected text locally with Chrome built-in Translator API.",
+  "description": "__MSG_appDesc__",
+  "default_locale": "en",
   "minimum_chrome_version": "138",
   "permissions": [
     "activeTab",
@@ -27,7 +28,7 @@
   },
   "action": {
     "default_popup": "src/popup/popup.html",
-    "default_title": "Xlat"
+    "default_title": "__MSG_appShortName__"
   },
   "options_page": "src/options/options.html",
   "icons": {
@@ -42,7 +43,7 @@
         "default": "Alt+A",
         "mac": "Alt+A"
       },
-      "description": "Translate the current page"
+      "description": "__MSG_translatePageShortcut__"
     }
   },
   "web_accessible_resources": [

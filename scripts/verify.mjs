@@ -8,6 +8,9 @@ if (JSON.stringify(actual) !== JSON.stringify(expected.sort())) throw new Error(
 if (manifest.minimum_chrome_version !== '138') throw new Error('minimum_chrome_version must be 138.');
 if (!manifest.host_permissions?.length) throw new Error('host_permissions required for auto content script injection.');
 if (!manifest.content_scripts?.length) throw new Error('Static content_scripts required for auto-injection on all pages.');
+if (!manifest.default_locale) throw new Error('default_locale required for i18n (e.g. "en").');
+const locales = await readdir('_locales');
+if (!locales.includes('en')) throw new Error('_locales/en/ with messages.json is required.');
 const webResources = manifest.web_accessible_resources ?? [];
 const resourceList = webResources.flatMap((entry) => entry.resources ?? []);
 for (const required of ['src/broker/broker.html', 'src/broker/broker.js']) {
@@ -42,11 +45,15 @@ async function collect(dir) {
 }
 
 const productionFiles = (await collect('src')).filter((path) => /\.(js|html|css)$/.test(path));
-const forbidden = [/fetch\s*\(/, /XMLHttpRequest/, /WebSocket/, /sendNativeMessage/, /translate\.googleapis/i, /deepl/i, /papago/i, /openai/i, /anthropic/i];
+const forbidden = [/XMLHttpRequest/, /WebSocket/, /sendNativeMessage/, /translate\.googleapis/i, /deepl/i, /papago/i, /openai/i, /anthropic/i];
 for (const file of productionFiles) {
   const text = await readFile(file, 'utf8');
   for (const pattern of forbidden) {
     if (pattern.test(text)) throw new Error(`Forbidden network/native pattern ${pattern} in ${file}`);
+  }
+  const fetchLines = text.split('\n').filter((l) => /fetch\s*\(/.test(l));
+  for (const fl of fetchLines) {
+    if (!fl.includes('chrome.runtime.getURL')) throw new Error(`fetch() in ${file} must only load bundled extension resources (use chrome.runtime.getURL).`);
   }
 }
 const broker = await readFile('src/broker/broker.js', 'utf8');
@@ -65,4 +72,10 @@ for (const id of ['sourceLanguage', 'targetLanguage', 'translatePage', 'clearTra
 if (/openBroker|OPEN_BROKER/.test(popupJs + popup)) {
   throw new Error('Popup must not expose a separate broker-open flow; broker fallback is automatic.');
 }
-console.log('Static verification passed: manifest permissions, min Chrome, auto-injection, content capabilities, iframe broker fallback, service worker boundary, no remote translation primitives.');
+if (!popupJs.includes('chrome.i18n.getMessage')) {
+  throw new Error('Popup JS must use chrome.i18n.getMessage for i18n.');
+}
+if (!serviceWorker.includes('chrome.i18n.getMessage')) {
+  throw new Error('Service worker must use chrome.i18n.getMessage for i18n.');
+}
+console.log('Static verification passed: manifest permissions, min Chrome, auto-injection, i18n locales, content capabilities, iframe broker fallback, service worker boundary, no remote translation primitives.');

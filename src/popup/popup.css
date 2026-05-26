@@ -100,4 +100,6 @@ h1 { font-size: 14px; font-weight: 700; letter-spacing: -0.01em; }
 .check { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); cursor: pointer; }
 .check input { margin: 0; width: auto; }
 
+.advanced-body hr { border: none; border-top: 1px solid var(--line); margin: 4px 0; }
+
 /* log */

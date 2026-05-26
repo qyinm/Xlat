@@ -1,6 +1,27 @@
 import { MessageType, XLAT_CONTEXT_MENU_TRANSLATE_SELECTION } from '../shared/messages.js';
 import { loadSettings } from '../shared/settings.js';
 
+let customMessages = null;
+
+async function loadMessages(locale) {
+  if (!locale) { customMessages = null; return; }
+  try {
+    const res = await fetch(chrome.runtime.getURL(`_locales/${locale}/messages.json`));
+    const data = await res.json();
+    customMessages = {};
+    for (const [key, val] of Object.entries(data)) {
+      customMessages[key] = val.message;
+    }
+  } catch (_) { customMessages = null; }
+}
+
+function t(key) {
+  if (customMessages && customMessages[key] !== undefined) return customMessages[key];
+  return chrome.i18n.getMessage(key) || key;
+}
+
+loadSettings().then((s) => loadMessages(s.uiLanguage));
+
 const translatedTabs = new Map();
 
 async function ensureContentScript(tabId) {
@@ -11,11 +32,11 @@ async function ensureContentScript(tabId) {
     } catch (_) {}
     await new Promise(r => setTimeout(r, 200));
   }
-  throw new Error('Content script not ready.');
+  throw new Error(t('contentScriptNotReady'));
 }
 
 chrome.runtime.onInstalled.addListener(() => {
-  chrome.contextMenus.create({ id: XLAT_CONTEXT_MENU_TRANSLATE_SELECTION, title: 'Translate selected text with Xlat', contexts: ['selection'] });
+  chrome.contextMenus.create({ id: XLAT_CONTEXT_MENU_TRANSLATE_SELECTION, title: t('contextMenuTitle'), contexts: ['selection'] });
 });
 
 chrome.tabs.onUpdated.addListener((tabId) => {

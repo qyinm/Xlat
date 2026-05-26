@@ -1,0 +1,213 @@
+{
+  "appName": {
+    "message": "Xlat แปลหน้าเว็บในเครื่อง",
+    "description": "Extension name in Chrome Web Store and toolbar"
+  },
+  "appDesc": {
+    "message": "แปลหน้าเว็บและข้อความที่เลือกในเครื่องด้วย Chrome Built-in Translator API",
+    "description": "Extension description in Chrome Web Store"
+  },
+  "appShortName": {
+    "message": "Xlat",
+    "description": "Short app name used in toolbar tooltip and page title"
+  },
+  "translatePage": {
+    "message": "แปลหน้าเว็บ",
+    "description": "Main action button in popup"
+  },
+  "clear": {
+    "message": "ล้าง",
+    "description": "Button to clear all translations"
+  },
+  "ready": {
+    "message": "พร้อม",
+    "description": "Status bar default ready state text"
+  },
+  "advanced": {
+    "message": "ขั้นสูง",
+    "description": "Collapsible section label in popup"
+  },
+  "displayMode": {
+    "message": "โหมดแสดงผล",
+    "description": "Label for display mode dropdown"
+  },
+  "displayModeOriginalBelow": {
+    "message": "ต้นฉบับ + ด้านล่าง",
+    "description": "Display mode option showing original text with translation below"
+  },
+  "displayModeReplace": {
+    "message": "แทนที่ (ระยะที่ 2)",
+    "description": "Display mode option to replace text with translation"
+  },
+  "maxBlocks": {
+    "message": "บล็อกสูงสุด",
+    "description": "Label for max blocks input"
+  },
+  "viewportOnly": {
+    "message": "เฉพาะวิวพอร์ต",
+    "description": "Checkbox label to translate only visible content"
+  },
+  "langAuto": {
+    "message": "ตรวจจับอัตโนมัติ",
+    "description": "Language dropdown option for automatic language detection"
+  },
+  "langTl": {
+    "message": "ฟิลิปปินส์",
+    "description": "Language name for Tagalog/Filipino"
+  },
+  "translatingPage": {
+    "message": "กำลังแปลหน้าเว็บ...",
+    "description": "Status shown while page translation is in progress"
+  },
+  "translatedBlocks": {
+    "message": "แปล $completed$/$total$ บล็อกหน้าเว็บแล้ว",
+    "description": "Status after page translation completes",
+    "placeholders": {
+      "completed": { "content": "$1", "example": "42" },
+      "total": { "content": "$2", "example": "80" }
+    }
+  },
+  "pageTranslationFailed": {
+    "message": "การแปลหน้าเว็บล้มเหลว",
+    "description": "Status when page translation fails"
+  },
+  "clearingTranslations": {
+    "message": "กำลังล้างการแปล...",
+    "description": "Status shown while clearing translations"
+  },
+  "clearFailed": {
+    "message": "การล้างล้มเหลว",
+    "description": "Status when clearing translations fails"
+  },
+  "removedNodes": {
+    "message": "ลบ $removed$ โหนด Xlat แล้ว",
+    "description": "Status after clearing translations",
+    "placeholders": {
+      "removed": { "content": "$1", "example": "5" }
+    }
+  },
+  "noActiveTab": {
+    "message": "ไม่มีแท็บที่ใช้งานอยู่",
+    "description": "Error when no active browser tab is found"
+  },
+  "contentScriptNotReady": {
+    "message": "คอนเทนต์สคริปต์ยังไม่พร้อม",
+    "description": "Error when content script is not yet injected"
+  },
+  "optionsTitle": {
+    "message": "ตัวเลือก Xlat",
+    "description": "Options page browser tab title"
+  },
+  "optionsSettings": {
+    "message": "การตั้งค่า Xlat",
+    "description": "Options page overline/section label"
+  },
+  "optionsHeading": {
+    "message": "ค่ากำหนดการแปลเริ่มต้น",
+    "description": "Options page main heading"
+  },
+  "optionsDescription": {
+    "message": "ค่าเริ่มต้นเหล่านี้อยู่ใน Chrome storage และถูกใช้โดยป๊อปอัปก่อนคำสั่งแปลในเครื่องแต่ละครั้ง",
+    "description": "Options page description text"
+  },
+  "defaultTargetLanguage": {
+    "message": "ภาษาเป้าหมายเริ่มต้น",
+    "description": "Label for default target language input"
+  },
+  "maxBlocksPerRun": {
+    "message": "บล็อกสูงสุดต่อรอบ",
+    "description": "Label for max blocks input in options"
+  },
+  "translateViewportFirst": {
+    "message": "แปลวิวพอร์ตที่มองเห็นก่อน",
+    "description": "Checkbox label in options"
+  },
+  "saved": {
+    "message": "บันทึกแล้ว",
+    "description": "Status shown after saving settings"
+  },
+  "moveWindow": {
+    "message": "ย้ายหน้าต่างแปลภาษา",
+    "description": "ARIA label on the translation overlay drag handle"
+  },
+  "closeTranslation": {
+    "message": "ปิดการแปล",
+    "description": "ARIA label on the translation overlay close button"
+  },
+  "brokerTitle": {
+    "message": "ตัวกลางการแปลในเครื่อง Xlat",
+    "description": "Title attribute on the hidden broker iframe"
+  },
+  "brokerNotReady": {
+    "message": "เฟรมตัวกลางยังไม่พร้อม",
+    "description": "Error when broker iframe fails to load"
+  },
+  "brokerTimedOut": {
+    "message": "การแปลของตัวกลางหมดเวลา",
+    "description": "Error when broker translation request times out"
+  },
+  "brokerFailed": {
+    "message": "การแปลของตัวกลางล้มเหลว",
+    "description": "Error when broker translation fails"
+  },
+  "translationUnavailable": {
+    "message": "ไม่สามารถแปลสำหรับ $pair$",
+    "description": "Error when translation is unavailable for a language pair",
+    "placeholders": {
+      "pair": { "content": "$1", "example": "en->ko" }
+    }
+  },
+  "unsupportedPage": {
+    "message": "หน้าเว็บที่ไม่รองรับการแปลคอนเทนต์สคริปต์: $url$",
+    "description": "Error when trying to translate on a restricted page",
+    "placeholders": {
+      "url": { "content": "$1", "example": "chrome://settings" }
+    }
+  },
+  "translatingTo": {
+    "message": "กำลังแปลเป็น $language$...",
+    "description": "Loading text shown inline during block translation",
+    "placeholders": {
+      "language": { "content": "$1", "example": "ko" }
+    }
+  },
+  "noSelectedText": {
+    "message": "ไม่มีข้อความที่เลือกให้แปล",
+    "description": "Error when no text is selected for selection translation"
+  },
+  "contextMenuTitle": {
+    "message": "แปลข้อความที่เลือกด้วย Xlat",
+    "description": "Right-click context menu item for selected text"
+  },
+  "brokerPageTitle": {
+    "message": "ตัวกลางท้องถิ่น Xlat",
+    "description": "Broker fallback page browser tab title"
+  },
+  "brokerHeading": {
+    "message": "ตัวกลางท้องถิ่น Xlat",
+    "description": "Broker fallback page heading"
+  },
+  "brokerConnecting": {
+    "message": "กำลังเชื่อมต่อ...",
+    "description": "Initial status shown while broker loads"
+  },
+  "brokerDescription": {
+    "message": "หน้าเว็บส่วนขยายนี้จัดการการเรียก AI ในตัวของ Chrome สำรองเมื่อไม่สามารถรันคอนเทนต์สคริปต์ได้",
+    "description": "Broker page description text"
+  },
+  "brokerTranslating": {
+    "message": "กำลังแปล $id$ ในเครื่อง...",
+    "description": "Status shown during active broker translation",
+    "placeholders": {
+      "id": { "content": "$1", "example": "xlat-broker-5" }
+    }
+  },
+  "brokerReady": {
+    "message": "พร้อม",
+    "description": "Status when broker is ready or translation complete"
+  },
+  "translatePageShortcut": {
+    "message": "แปลหน้าเว็บปัจจุบัน",
+    "description": "Description for the keyboard shortcut in chrome://extensions/shortcuts"
+  }
+}

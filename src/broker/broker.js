@@ -1,3 +1,4 @@
+const t = (key, ...args) => chrome.i18n.getMessage(key, args) || key;
 const statusEl = document.querySelector('#status');
 const translatorCache = new Map();
 function setStatus(text) { if (statusEl) statusEl.textContent = text; }
@@ -21,7 +22,7 @@ async function getTranslator(sourceLanguage, targetLanguage, monitor) {
 }
 async function handleTranslate(payload) {
   const { id, text, sourceLanguage, targetLanguage = 'ko' } = payload;
-  setStatus(`Translating ${id} locally...`);
+  setStatus(t('brokerTranslating', id));
   const detected = sourceLanguage ? { language: sourceLanguage } : await detectLanguage(text);
   if (detected.language === targetLanguage) return { id, ok: true, translatedText: text, sourceLanguage: detected.language, skipped: 'same-language' };
   const progress = [];
@@ -40,8 +41,8 @@ addEventListener('message', (event) => {
   const message = event.data;
   if (!message || message.type !== 'XLAT_BROKER_TRANSLATE') return;
   handleTranslate(message)
-    .then((response) => { parent.postMessage({ type: 'XLAT_BROKER_RESULT', ...response }, '*'); setStatus('Ready.'); })
-    .catch((error) => { parent.postMessage({ type: 'XLAT_BROKER_RESULT', id: message.id, ok: false, error: serializeError(error) }, '*'); setStatus('Broker translation failed.'); });
+    .then((response) => { parent.postMessage({ type: 'XLAT_BROKER_RESULT', ...response }, '*'); setStatus(t('brokerReady')); })
+    .catch((error) => { parent.postMessage({ type: 'XLAT_BROKER_RESULT', id: message.id, ok: false, error: serializeError(error) }, '*'); setStatus(t('brokerFailed')); });
 });
-setStatus('Ready.');
+setStatus(t('brokerReady'));
 parent.postMessage({ type: 'XLAT_BROKER_READY' }, '*');

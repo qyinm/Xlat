@@ -1,0 +1,213 @@
+{
+  "appName": {
+    "message": "Xlat 本地页面翻译器",
+    "description": "Extension name in Chrome Web Store and toolbar"
+  },
+  "appDesc": {
+    "message": "使用 Chrome 内置翻译 API 在本地翻译页面和选中的文本。",
+    "description": "Extension description in Chrome Web Store"
+  },
+  "appShortName": {
+    "message": "Xlat",
+    "description": "Short app name used in toolbar tooltip and page title"
+  },
+  "translatePage": {
+    "message": "翻译页面",
+    "description": "Main action button in popup"
+  },
+  "clear": {
+    "message": "清除",
+    "description": "Button to clear all translations"
+  },
+  "ready": {
+    "message": "就绪。",
+    "description": "Status bar default ready state text"
+  },
+  "advanced": {
+    "message": "高级",
+    "description": "Collapsible section label in popup"
+  },
+  "displayMode": {
+    "message": "显示模式",
+    "description": "Label for display mode dropdown"
+  },
+  "displayModeOriginalBelow": {
+    "message": "原文 + 下方译文",
+    "description": "Display mode option showing original text with translation below"
+  },
+  "displayModeReplace": {
+    "message": "替换（阶段二）",
+    "description": "Display mode option to replace text with translation"
+  },
+  "maxBlocks": {
+    "message": "最大块数",
+    "description": "Label for max blocks input"
+  },
+  "viewportOnly": {
+    "message": "仅视口",
+    "description": "Checkbox label to translate only visible content"
+  },
+  "langAuto": {
+    "message": "自动检测",
+    "description": "Language dropdown option for automatic language detection"
+  },
+  "langTl": {
+    "message": "菲律宾语",
+    "description": "Language name for Tagalog/Filipino"
+  },
+  "translatingPage": {
+    "message": "正在翻译页面...",
+    "description": "Status shown while page translation is in progress"
+  },
+  "translatedBlocks": {
+    "message": "已翻译 $completed$/$total$ 个页面块。",
+    "description": "Status after page translation completes",
+    "placeholders": {
+      "completed": { "content": "$1", "example": "42" },
+      "total": { "content": "$2", "example": "80" }
+    }
+  },
+  "pageTranslationFailed": {
+    "message": "页面翻译失败。",
+    "description": "Status when page translation fails"
+  },
+  "clearingTranslations": {
+    "message": "正在清除翻译...",
+    "description": "Status shown while clearing translations"
+  },
+  "clearFailed": {
+    "message": "清除失败。",
+    "description": "Status when clearing translations fails"
+  },
+  "removedNodes": {
+    "message": "已移除 $removed$ 个 Xlat 节点。",
+    "description": "Status after clearing translations",
+    "placeholders": {
+      "removed": { "content": "$1", "example": "5" }
+    }
+  },
+  "noActiveTab": {
+    "message": "没有活动的标签页。",
+    "description": "Error when no active browser tab is found"
+  },
+  "contentScriptNotReady": {
+    "message": "内容脚本未就绪。",
+    "description": "Error when content script is not yet injected"
+  },
+  "optionsTitle": {
+    "message": "Xlat 选项",
+    "description": "Options page browser tab title"
+  },
+  "optionsSettings": {
+    "message": "Xlat 设置",
+    "description": "Options page overline/section label"
+  },
+  "optionsHeading": {
+    "message": "默认翻译偏好",
+    "description": "Options page main heading"
+  },
+  "optionsDescription": {
+    "message": "这些默认设置将保存在 Chrome 存储中，每次本地翻译命令前由弹出窗口使用。",
+    "description": "Options page description text"
+  },
+  "defaultTargetLanguage": {
+    "message": "默认目标语言",
+    "description": "Label for default target language input"
+  },
+  "maxBlocksPerRun": {
+    "message": "每次运行最大块数",
+    "description": "Label for max blocks input in options"
+  },
+  "translateViewportFirst": {
+    "message": "优先翻译可见视口",
+    "description": "Checkbox label in options"
+  },
+  "saved": {
+    "message": "已保存。",
+    "description": "Status shown after saving settings"
+  },
+  "moveWindow": {
+    "message": "移动翻译窗口",
+    "description": "ARIA label on the translation overlay drag handle"
+  },
+  "closeTranslation": {
+    "message": "关闭翻译",
+    "description": "ARIA label on the translation overlay close button"
+  },
+  "brokerTitle": {
+    "message": "Xlat 本地翻译代理",
+    "description": "Title attribute on the hidden broker iframe"
+  },
+  "brokerNotReady": {
+    "message": "代理框架未能就绪。",
+    "description": "Error when broker iframe fails to load"
+  },
+  "brokerTimedOut": {
+    "message": "代理翻译超时。",
+    "description": "Error when broker translation request times out"
+  },
+  "brokerFailed": {
+    "message": "代理翻译失败。",
+    "description": "Error when broker translation fails"
+  },
+  "translationUnavailable": {
+    "message": "翻译不可用于 $pair$。",
+    "description": "Error when translation is unavailable for a language pair",
+    "placeholders": {
+      "pair": { "content": "$1", "example": "en->ko" }
+    }
+  },
+  "unsupportedPage": {
+    "message": "不支持在此页面执行内容脚本翻译：$url$",
+    "description": "Error when trying to translate on a restricted page",
+    "placeholders": {
+      "url": { "content": "$1", "example": "chrome://settings" }
+    }
+  },
+  "translatingTo": {
+    "message": "正在翻译为 $language$...",
+    "description": "Loading text shown inline during block translation",
+    "placeholders": {
+      "language": { "content": "$1", "example": "ko" }
+    }
+  },
+  "noSelectedText": {
+    "message": "没有选中的文本需要翻译。",
+    "description": "Error when no text is selected for selection translation"
+  },
+  "contextMenuTitle": {
+    "message": "使用 Xlat 翻译选中的文本",
+    "description": "Right-click context menu item for selected text"
+  },
+  "brokerPageTitle": {
+    "message": "Xlat 本地代理",
+    "description": "Broker fallback page browser tab title"
+  },
+  "brokerHeading": {
+    "message": "Xlat 本地代理",
+    "description": "Broker fallback page heading"
+  },
+  "brokerConnecting": {
+    "message": "连接中...",
+    "description": "Initial status shown while broker loads"
+  },
+  "brokerDescription": {
+    "message": "当内容脚本无法执行时，此扩展页面负责回退调用 Chrome 内置 AI 进行翻译。",
+    "description": "Broker page description text"
+  },
+  "brokerTranslating": {
+    "message": "正在本地翻译 $id$...",
+    "description": "Status shown during active broker translation",
+    "placeholders": {
+      "id": { "content": "$1", "example": "xlat-broker-5" }
+    }
+  },
+  "brokerReady": {
+    "message": "就绪。",
+    "description": "Status when broker is ready or translation complete"
+  },
+  "translatePageShortcut": {
+    "message": "翻译当前页面",
+    "description": "Description for the keyboard shortcut in chrome://extensions/shortcuts"
+  }
+}

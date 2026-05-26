@@ -1,0 +1,213 @@
+{
+  "appName": {
+    "message": "Xlat Paikallinen Sivunkääntäjä",
+    "description": "Extension name in Chrome Web Store and toolbar"
+  },
+  "appDesc": {
+    "message": "Käännä sivu ja valittu teksti paikallisesti Chromen sisäänrakennetulla Translator API:lla.",
+    "description": "Extension description in Chrome Web Store"
+  },
+  "appShortName": {
+    "message": "Xlat",
+    "description": "Short app name used in toolbar tooltip and page title"
+  },
+  "translatePage": {
+    "message": "Käännä sivu",
+    "description": "Main action button in popup"
+  },
+  "clear": {
+    "message": "Tyhjennä",
+    "description": "Button to clear all translations"
+  },
+  "ready": {
+    "message": "Valmis.",
+    "description": "Status bar default ready state text"
+  },
+  "advanced": {
+    "message": "Lisäasetukset",
+    "description": "Collapsible section label in popup"
+  },
+  "displayMode": {
+    "message": "Näyttötila",
+    "description": "Label for display mode dropdown"
+  },
+  "displayModeOriginalBelow": {
+    "message": "Alkuperäinen + alla",
+    "description": "Display mode option showing original text with translation below"
+  },
+  "displayModeReplace": {
+    "message": "Korvaa (vaihe 2)",
+    "description": "Display mode option to replace text with translation"
+  },
+  "maxBlocks": {
+    "message": "Maksimilohkot",
+    "description": "Label for max blocks input"
+  },
+  "viewportOnly": {
+    "message": "Vain näkyvä alue",
+    "description": "Checkbox label to translate only visible content"
+  },
+  "langAuto": {
+    "message": "Tunnista automaattisesti",
+    "description": "Language dropdown option for automatic language detection"
+  },
+  "langTl": {
+    "message": "Filipino",
+    "description": "Language name for Tagalog/Filipino"
+  },
+  "translatingPage": {
+    "message": "Käännetään sivua...",
+    "description": "Status shown while page translation is in progress"
+  },
+  "translatedBlocks": {
+    "message": "Käännetty $completed$/$total$ sivulohkoa.",
+    "description": "Status after page translation completes",
+    "placeholders": {
+      "completed": { "content": "$1", "example": "42" },
+      "total": { "content": "$2", "example": "80" }
+    }
+  },
+  "pageTranslationFailed": {
+    "message": "Sivun käännös epäonnistui.",
+    "description": "Status when page translation fails"
+  },
+  "clearingTranslations": {
+    "message": "Tyhjennetään käännöksiä...",
+    "description": "Status shown while clearing translations"
+  },
+  "clearFailed": {
+    "message": "Tyhjennys epäonnistui.",
+    "description": "Status when clearing translations fails"
+  },
+  "removedNodes": {
+    "message": "Poistettu $removed$ Xlat-solmua.",
+    "description": "Status after clearing translations",
+    "placeholders": {
+      "removed": { "content": "$1", "example": "5" }
+    }
+  },
+  "noActiveTab": {
+    "message": "Ei aktiivista välilehteä.",
+    "description": "Error when no active browser tab is found"
+  },
+  "contentScriptNotReady": {
+    "message": "Sisältöskripti ei ole valmis.",
+    "description": "Error when content script is not yet injected"
+  },
+  "optionsTitle": {
+    "message": "Xlat-asetukset",
+    "description": "Options page browser tab title"
+  },
+  "optionsSettings": {
+    "message": "Xlat-asetukset",
+    "description": "Options page overline/section label"
+  },
+  "optionsHeading": {
+    "message": "Oletuskäännösasetukset",
+    "description": "Options page main heading"
+  },
+  "optionsDescription": {
+    "message": "Nämä oletusasetukset säilyvät Chromen tallennustilassa, ja ponnahdusikkuna käyttää niitä ennen jokaista paikallista käännöskomentoa.",
+    "description": "Options page description text"
+  },
+  "defaultTargetLanguage": {
+    "message": "Oletuskohdekieli",
+    "description": "Label for default target language input"
+  },
+  "maxBlocksPerRun": {
+    "message": "Maksimilohkot suoritusta kohti",
+    "description": "Label for max blocks input in options"
+  },
+  "translateViewportFirst": {
+    "message": "Käännä näkyvä näkymäalue ensin",
+    "description": "Checkbox label in options"
+  },
+  "saved": {
+    "message": "Tallennettu.",
+    "description": "Status shown after saving settings"
+  },
+  "moveWindow": {
+    "message": "Siirrä käännösikkunaa",
+    "description": "ARIA label on the translation overlay drag handle"
+  },
+  "closeTranslation": {
+    "message": "Sulje käännös",
+    "description": "ARIA label on the translation overlay close button"
+  },
+  "brokerTitle": {
+    "message": "Xlat paikallinen käännösvälittäjä",
+    "description": "Title attribute on the hidden broker iframe"
+  },
+  "brokerNotReady": {
+    "message": "Välittäjäkehys ei tullut valmiiksi.",
+    "description": "Error when broker iframe fails to load"
+  },
+  "brokerTimedOut": {
+    "message": "Välittäjän käännös aikakatkaistiin.",
+    "description": "Error when broker translation request times out"
+  },
+  "brokerFailed": {
+    "message": "Välittäjän käännös epäonnistui.",
+    "description": "Error when broker translation fails"
+  },
+  "translationUnavailable": {
+    "message": "Käännös ei saatavilla kielelle $pair$.",
+    "description": "Error when translation is unavailable for a language pair",
+    "placeholders": {
+      "pair": { "content": "$1", "example": "en->ko" }
+    }
+  },
+  "unsupportedPage": {
+    "message": "Sivu ei tue sisältöskriptin käännöstä: $url$",
+    "description": "Error when trying to translate on a restricted page",
+    "placeholders": {
+      "url": { "content": "$1", "example": "chrome://settings" }
+    }
+  },
+  "translatingTo": {
+    "message": "Käännetään kielelle $language$...",
+    "description": "Loading text shown inline during block translation",
+    "placeholders": {
+      "language": { "content": "$1", "example": "ko" }
+    }
+  },
+  "noSelectedText": {
+    "message": "Ei valittua tekstiä käännettäväksi.",
+    "description": "Error when no text is selected for selection translation"
+  },
+  "contextMenuTitle": {
+    "message": "Käännä valittu teksti Xlatilla",
+    "description": "Right-click context menu item for selected text"
+  },
+  "brokerPageTitle": {
+    "message": "Xlat Paikallinen Välittäjä",
+    "description": "Broker fallback page browser tab title"
+  },
+  "brokerHeading": {
+    "message": "Xlat Paikallinen Välittäjä",
+    "description": "Broker fallback page heading"
+  },
+  "brokerConnecting": {
+    "message": "Yhdistetään...",
+    "description": "Initial status shown while broker loads"
+  },
+  "brokerDescription": {
+    "message": "Tämä laajennussivu omistaa varalla olevat Chromen sisäänrakennetut AI-kutsut, kun sisältöskriptin suoritus ei ole käytettävissä.",
+    "description": "Broker page description text"
+  },
+  "brokerTranslating": {
+    "message": "Käännetään $id$ paikallisesti...",
+    "description": "Status shown during active broker translation",
+    "placeholders": {
+      "id": { "content": "$1", "example": "xlat-broker-5" }
+    }
+  },
+  "brokerReady": {
+    "message": "Valmis.",
+    "description": "Status when broker is ready or translation complete"
+  },
+  "translatePageShortcut": {
+    "message": "Käännä nykyinen sivu",
+    "description": "Description for the keyboard shortcut in chrome://extensions/shortcuts"
+  }
+}

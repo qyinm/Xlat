@@ -1,0 +1,213 @@
+{
+  "appName": {
+    "message": "Penterjemah Halaman Tempatan Xlat",
+    "description": "Extension name in Chrome Web Store and toolbar"
+  },
+  "appDesc": {
+    "message": "Terjemah halaman dan teks terpilih secara tempatan dengan API Penterjemah terbina dalam Chrome.",
+    "description": "Extension description in Chrome Web Store"
+  },
+  "appShortName": {
+    "message": "Xlat",
+    "description": "Short app name used in toolbar tooltip and page title"
+  },
+  "translatePage": {
+    "message": "Terjemah halaman",
+    "description": "Main action button in popup"
+  },
+  "clear": {
+    "message": "Kosongkan",
+    "description": "Button to clear all translations"
+  },
+  "ready": {
+    "message": "Sedia.",
+    "description": "Status bar default ready state text"
+  },
+  "advanced": {
+    "message": "Lanjutan",
+    "description": "Collapsible section label in popup"
+  },
+  "displayMode": {
+    "message": "Mod paparan",
+    "description": "Label for display mode dropdown"
+  },
+  "displayModeOriginalBelow": {
+    "message": "Asal + di bawah",
+    "description": "Display mode option showing original text with translation below"
+  },
+  "displayModeReplace": {
+    "message": "Ganti (fasa 2)",
+    "description": "Display mode option to replace text with translation"
+  },
+  "maxBlocks": {
+    "message": "Blok maks",
+    "description": "Label for max blocks input"
+  },
+  "viewportOnly": {
+    "message": "Pandangan sahaja",
+    "description": "Checkbox label to translate only visible content"
+  },
+  "langAuto": {
+    "message": "Kesan auto",
+    "description": "Language dropdown option for automatic language detection"
+  },
+  "langTl": {
+    "message": "Filipino",
+    "description": "Language name for Tagalog/Filipino"
+  },
+  "translatingPage": {
+    "message": "Menterjemah halaman...",
+    "description": "Status shown while page translation is in progress"
+  },
+  "translatedBlocks": {
+    "message": "Menterjemah $completed$/$total$ blok halaman.",
+    "description": "Status after page translation completes",
+    "placeholders": {
+      "completed": { "content": "$1", "example": "42" },
+      "total": { "content": "$2", "example": "80" }
+    }
+  },
+  "pageTranslationFailed": {
+    "message": "Terjemahan halaman gagal.",
+    "description": "Status when page translation fails"
+  },
+  "clearingTranslations": {
+    "message": "Mengosongkan terjemahan...",
+    "description": "Status shown while clearing translations"
+  },
+  "clearFailed": {
+    "message": "Kosong gagal.",
+    "description": "Status when clearing translations fails"
+  },
+  "removedNodes": {
+    "message": "$removed$ nod Xlat dibuang.",
+    "description": "Status after clearing translations",
+    "placeholders": {
+      "removed": { "content": "$1", "example": "5" }
+    }
+  },
+  "noActiveTab": {
+    "message": "Tiada tab aktif.",
+    "description": "Error when no active browser tab is found"
+  },
+  "contentScriptNotReady": {
+    "message": "Skrip kandungan tidak sedia.",
+    "description": "Error when content script is not yet injected"
+  },
+  "optionsTitle": {
+    "message": "Pilihan Xlat",
+    "description": "Options page browser tab title"
+  },
+  "optionsSettings": {
+    "message": "Tetapan Xlat",
+    "description": "Options page overline/section label"
+  },
+  "optionsHeading": {
+    "message": "Keutamaan terjemahan lalai",
+    "description": "Options page main heading"
+  },
+  "optionsDescription": {
+    "message": "Lalai ini disimpan dalam storan Chrome dan digunakan oleh popup sebelum setiap arahan terjemahan tempatan.",
+    "description": "Options page description text"
+  },
+  "defaultTargetLanguage": {
+    "message": "Bahasa sasaran lalai",
+    "description": "Label for default target language input"
+  },
+  "maxBlocksPerRun": {
+    "message": "Blok maks setiap larian",
+    "description": "Label for max blocks input in options"
+  },
+  "translateViewportFirst": {
+    "message": "Terjemah pandangan yang kelihatan dahulu",
+    "description": "Checkbox label in options"
+  },
+  "saved": {
+    "message": "Disimpan.",
+    "description": "Status shown after saving settings"
+  },
+  "moveWindow": {
+    "message": "Gerakkan tetingkap terjemahan",
+    "description": "ARIA label on the translation overlay drag handle"
+  },
+  "closeTranslation": {
+    "message": "Tutup terjemahan",
+    "description": "ARIA label on the translation overlay close button"
+  },
+  "brokerTitle": {
+    "message": "Broker terjemahan tempatan Xlat",
+    "description": "Title attribute on the hidden broker iframe"
+  },
+  "brokerNotReady": {
+    "message": "Rangka broker tidak menjadi sedia.",
+    "description": "Error when broker iframe fails to load"
+  },
+  "brokerTimedOut": {
+    "message": "Terjemahan broker tamat masa.",
+    "description": "Error when broker translation request times out"
+  },
+  "brokerFailed": {
+    "message": "Terjemahan broker gagal.",
+    "description": "Error when broker translation fails"
+  },
+  "translationUnavailable": {
+    "message": "Terjemahan tidak tersedia untuk $pair$.",
+    "description": "Error when translation is unavailable for a language pair",
+    "placeholders": {
+      "pair": { "content": "$1", "example": "en->ko" }
+    }
+  },
+  "unsupportedPage": {
+    "message": "Halaman tidak disokong untuk terjemahan skrip kandungan: $url$",
+    "description": "Error when trying to translate on a restricted page",
+    "placeholders": {
+      "url": { "content": "$1", "example": "chrome://settings" }
+    }
+  },
+  "translatingTo": {
+    "message": "Menterjemah ke $language$...",
+    "description": "Loading text shown inline during block translation",
+    "placeholders": {
+      "language": { "content": "$1", "example": "ko" }
+    }
+  },
+  "noSelectedText": {
+    "message": "Tiada teks dipilih untuk diterjemah.",
+    "description": "Error when no text is selected for selection translation"
+  },
+  "contextMenuTitle": {
+    "message": "Terjemah teks dipilih dengan Xlat",
+    "description": "Right-click context menu item for selected text"
+  },
+  "brokerPageTitle": {
+    "message": "Broker Tempatan Xlat",
+    "description": "Broker fallback page browser tab title"
+  },
+  "brokerHeading": {
+    "message": "Broker Tempatan Xlat",
+    "description": "Broker fallback page heading"
+  },
+  "brokerConnecting": {
+    "message": "Menyambung...",
+    "description": "Initial status shown while broker loads"
+  },
+  "brokerDescription": {
+    "message": "Halaman sambungan ini memiliki panggilan AI terbina dalam Chrome gantian apabila pelaksanaan skrip kandungan tidak tersedia.",
+    "description": "Broker page description text"
+  },
+  "brokerTranslating": {
+    "message": "Menterjemah $id$ secara tempatan...",
+    "description": "Status shown during active broker translation",
+    "placeholders": {
+      "id": { "content": "$1", "example": "xlat-broker-5" }
+    }
+  },
+  "brokerReady": {
+    "message": "Sedia.",
+    "description": "Status when broker is ready or translation complete"
+  },
+  "translatePageShortcut": {
+    "message": "Terjemah halaman semasa",
+    "description": "Description for the keyboard shortcut in chrome://extensions/shortcuts"
+  }
+}

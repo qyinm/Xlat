@@ -2,13 +2,13 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Xlat</title>
+    <title data-i18n="appShortName">Xlat</title>
     <link rel="stylesheet" href="popup.css" />
   </head>
   <body>
     <main class="shell">
       <header class="bar">
-        <h1>Xlat</h1>
+        <h1 data-i18n="appShortName">Xlat</h1>
       </header>
 
       <div class="lang-row">
@@ -18,28 +18,62 @@
       </div>
 
       <div class="actions">
-        <button id="translatePage" class="btn primary-action" type="button">Translate page</button>
-        <button id="clearTranslations" class="btn" type="button">Clear</button>
+        <button id="translatePage" class="btn primary-action" type="button" data-i18n="translatePage">Translate page</button>
+        <button id="clearTranslations" class="btn" type="button" data-i18n="clear">Clear</button>
       </div>
 
       <footer class="status-bar" aria-live="polite">
         <span id="statusDot" class="dot" aria-hidden="true"></span>
-        <span id="status">Ready.</span>
+        <span id="status" data-i18n="ready">Ready.</span>
       </footer>
 
       <details class="advanced">
-        <summary>Advanced</summary>
+        <summary data-i18n="advanced">Advanced</summary>
         <div class="advanced-body">
-          <label class="cfield">Display mode
+          <label class="cfield" data-i18n="displayMode">Display mode
             <select id="displayMode">
-              <option value="append-below-original">Original + below</option>
-              <option value="replace-text" disabled>Replace (phase 2)</option>
+              <option value="append-below-original" data-i18n="displayModeOriginalBelow">Original + below</option>
+              <option value="replace-text" disabled data-i18n="displayModeReplace">Replace (phase 2)</option>
             </select>
           </label>
-          <label class="cfield">Max blocks
+          <label class="cfield" data-i18n="maxBlocks">Max blocks
             <input id="maxBlocks" type="number" min="1" max="500" value="80" />
           </label>
-          <label class="check"><input id="viewportOnly" type="checkbox" /> Viewport only</label>
+          <label class="check" data-i18n="viewportOnly"><input id="viewportOnly" type="checkbox" /> Viewport only</label>
+          <hr />
+          <label class="cfield">UI Language
+            <select id="uiLanguage">
+              <option value="">Browser default</option>
+              <option value="en">English</option>
+              <option value="ko">한국어</option>
+              <option value="ja">日本語</option>
+              <option value="zh-Hans">中文 (简体)</option>
+              <option value="es">Español</option>
+              <option value="hi">हिन्दी</option>
+              <option value="ar">العربية</option>
+              <option value="pt">Português</option>
+              <option value="bn">বাংলা</option>
+              <option value="ru">Русский</option>
+              <option value="de">Deutsch</option>
+              <option value="fr">Français</option>
+              <option value="it">Italiano</option>
+              <option value="id">Bahasa Indonesia</option>
+              <option value="tr">Türkçe</option>
+              <option value="vi">Tiếng Việt</option>
+              <option value="th">ไทย</option>
+              <option value="ms">Bahasa Melayu</option>
+              <option value="nl">Nederlands</option>
+              <option value="pl">Polski</option>
+              <option value="uk">Українська</option>
+              <option value="ro">Română</option>
+              <option value="cs">Čeština</option>
+              <option value="hu">Magyar</option>
+              <option value="sv">Svenska</option>
+              <option value="da">Dansk</option>
+              <option value="no">Norsk</option>
+              <option value="fi">Suomi</option>
+            </select>
+          </label>
         </div>
       </details>
 
