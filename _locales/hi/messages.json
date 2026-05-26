@@ -36,7 +36,7 @@
     "description": "Display mode option showing original text with translation below"
   },
   "displayModeReplace": {
-    "message": "बदलें (चरण 2)",
+    "message": "बदलें",
     "description": "Display mode option to replace text with translation"
   },
   "maxBlocks": {
@@ -60,11 +60,17 @@
     "description": "Status shown while page translation is in progress"
   },
   "translatedBlocks": {
-    "message": "पेज के $completed$/$total$ ब्लॉक का अनुवाद हुआ।",
+    "message": "पेज के $1/$2 ब्लॉक का अनुवाद हुआ।",
     "description": "Status after page translation completes",
     "placeholders": {
-      "completed": { "content": "$1", "example": "42" },
-      "total": { "content": "$2", "example": "80" }
+      "completed": {
+        "content": "$1",
+        "example": "42"
+      },
+      "total": {
+        "content": "$2",
+        "example": "80"
+      }
     }
   },
   "pageTranslationFailed": {
@@ -80,10 +86,13 @@
     "description": "Status when clearing translations fails"
   },
   "removedNodes": {
-    "message": "$removed$ Xlat नोड हटाए गए।",
+    "message": "$1 Xlat नोड हटाए गए।",
     "description": "Status after clearing translations",
     "placeholders": {
-      "removed": { "content": "$1", "example": "5" }
+      "removed": {
+        "content": "$1",
+        "example": "5"
+      }
     }
   },
   "noActiveTab": {
@@ -151,24 +160,33 @@
     "description": "Error when broker translation fails"
   },
   "translationUnavailable": {
-    "message": "$pair$ के लिए अनुवाद उपलब्ध नहीं।",
+    "message": "$1 के लिए अनुवाद उपलब्ध नहीं।",
     "description": "Error when translation is unavailable for a language pair",
     "placeholders": {
-      "pair": { "content": "$1", "example": "en->ko" }
+      "pair": {
+        "content": "$1",
+        "example": "en->ko"
+      }
     }
   },
   "unsupportedPage": {
-    "message": "कंटेंट स्क्रिप्ट अनुवाद के लिए असमर्थित पेज: $url$",
+    "message": "कंटेंट स्क्रिप्ट अनुवाद के लिए असमर्थित पेज: $1",
     "description": "Error when trying to translate on a restricted page",
     "placeholders": {
-      "url": { "content": "$1", "example": "chrome://settings" }
+      "url": {
+        "content": "$1",
+        "example": "chrome://settings"
+      }
     }
   },
   "translatingTo": {
-    "message": "$language$ में अनुवाद हो रहा है...",
+    "message": "$1 में अनुवाद हो रहा है...",
     "description": "Loading text shown inline during block translation",
     "placeholders": {
-      "language": { "content": "$1", "example": "ko" }
+      "language": {
+        "content": "$1",
+        "example": "ko"
+      }
     }
   },
   "noSelectedText": {
@@ -196,10 +214,13 @@
     "description": "Broker page description text"
   },
   "brokerTranslating": {
-    "message": "$id$ का स्थानीय अनुवाद हो रहा है...",
+    "message": "$1 का स्थानीय अनुवाद हो रहा है...",
     "description": "Status shown during active broker translation",
     "placeholders": {
-      "id": { "content": "$1", "example": "xlat-broker-5" }
+      "id": {
+        "content": "$1",
+        "example": "xlat-broker-5"
+      }
     }
   },
   "brokerReady": {

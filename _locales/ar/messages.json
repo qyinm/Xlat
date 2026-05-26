@@ -36,7 +36,7 @@
     "description": "Display mode option showing original text with translation below"
   },
   "displayModeReplace": {
-    "message": "استبدال (المرحلة 2)",
+    "message": "استبدال",
     "description": "Display mode option to replace text with translation"
   },
   "maxBlocks": {
@@ -60,11 +60,17 @@
     "description": "Status shown while page translation is in progress"
   },
   "translatedBlocks": {
-    "message": "تمت ترجمة $completed$ من $total$ كتلة في الصفحة.",
+    "message": "تمت ترجمة $1 من $2 كتلة في الصفحة.",
     "description": "Status after page translation completes",
     "placeholders": {
-      "completed": { "content": "$1", "example": "42" },
-      "total": { "content": "$2", "example": "80" }
+      "completed": {
+        "content": "$1",
+        "example": "42"
+      },
+      "total": {
+        "content": "$2",
+        "example": "80"
+      }
     }
   },
   "pageTranslationFailed": {
@@ -80,10 +86,13 @@
     "description": "Status when clearing translations fails"
   },
   "removedNodes": {
-    "message": "تمت إزالة $removed$ عقدة Xlat.",
+    "message": "تمت إزالة $1 عقدة Xlat.",
     "description": "Status after clearing translations",
     "placeholders": {
-      "removed": { "content": "$1", "example": "5" }
+      "removed": {
+        "content": "$1",
+        "example": "5"
+      }
     }
   },
   "noActiveTab": {
@@ -151,24 +160,33 @@
     "description": "Error when broker translation fails"
   },
   "translationUnavailable": {
-    "message": "الترجمة غير متاحة لـ $pair$.",
+    "message": "الترجمة غير متاحة لـ $1.",
     "description": "Error when translation is unavailable for a language pair",
     "placeholders": {
-      "pair": { "content": "$1", "example": "en->ko" }
+      "pair": {
+        "content": "$1",
+        "example": "en->ko"
+      }
     }
   },
   "unsupportedPage": {
-    "message": "صفحة غير مدعومة لترجمة البرنامج النصي للمحتوى: $url$",
+    "message": "صفحة غير مدعومة لترجمة البرنامج النصي للمحتوى: $1",
     "description": "Error when trying to translate on a restricted page",
     "placeholders": {
-      "url": { "content": "$1", "example": "chrome://settings" }
+      "url": {
+        "content": "$1",
+        "example": "chrome://settings"
+      }
     }
   },
   "translatingTo": {
-    "message": "جاري الترجمة إلى $language$...",
+    "message": "جاري الترجمة إلى $1...",
     "description": "Loading text shown inline during block translation",
     "placeholders": {
-      "language": { "content": "$1", "example": "ko" }
+      "language": {
+        "content": "$1",
+        "example": "ko"
+      }
     }
   },
   "noSelectedText": {
@@ -196,10 +214,13 @@
     "description": "Broker page description text"
   },
   "brokerTranslating": {
-    "message": "جاري ترجمة $id$ محليًا...",
+    "message": "جاري ترجمة $1 محليًا...",
     "description": "Status shown during active broker translation",
     "placeholders": {
-      "id": { "content": "$1", "example": "xlat-broker-5" }
+      "id": {
+        "content": "$1",
+        "example": "xlat-broker-5"
+      }
     }
   },
   "brokerReady": {

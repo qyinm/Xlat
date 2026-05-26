@@ -2,10 +2,8 @@ export const DEFAULT_SETTINGS = Object.freeze({
   sourceLanguage: 'auto',
   targetLanguage: 'ko',
   displayMode: 'append-below-original',
-  maxBlocks: 80,
   viewportOnly: false,
-  includeCode: false,
-  uiLanguage: ''
+  uiLanguage: '',
 });
 
 export async function loadSettings() {

@@ -60,11 +60,17 @@
     "description": "Status shown while page translation is in progress"
   },
   "translatedBlocks": {
-    "message": "已翻译 $completed$/$total$ 个页面块。",
+    "message": "已翻译 $1/$2 个页面块。",
     "description": "Status after page translation completes",
     "placeholders": {
-      "completed": { "content": "$1", "example": "42" },
-      "total": { "content": "$2", "example": "80" }
+      "completed": {
+        "content": "$1",
+        "example": "42"
+      },
+      "total": {
+        "content": "$2",
+        "example": "80"
+      }
     }
   },
   "pageTranslationFailed": {
@@ -80,10 +86,13 @@
     "description": "Status when clearing translations fails"
   },
   "removedNodes": {
-    "message": "已移除 $removed$ 个 Xlat 节点。",
+    "message": "已移除 $1 个 Xlat 节点。",
     "description": "Status after clearing translations",
     "placeholders": {
-      "removed": { "content": "$1", "example": "5" }
+      "removed": {
+        "content": "$1",
+        "example": "5"
+      }
     }
   },
   "noActiveTab": {
@@ -151,24 +160,33 @@
     "description": "Error when broker translation fails"
   },
   "translationUnavailable": {
-    "message": "翻译不可用于 $pair$。",
+    "message": "翻译不可用于 $1。",
     "description": "Error when translation is unavailable for a language pair",
     "placeholders": {
-      "pair": { "content": "$1", "example": "en->ko" }
+      "pair": {
+        "content": "$1",
+        "example": "en->ko"
+      }
     }
   },
   "unsupportedPage": {
-    "message": "不支持在此页面执行内容脚本翻译：$url$",
+    "message": "不支持在此页面执行内容脚本翻译：$1",
     "description": "Error when trying to translate on a restricted page",
     "placeholders": {
-      "url": { "content": "$1", "example": "chrome://settings" }
+      "url": {
+        "content": "$1",
+        "example": "chrome://settings"
+      }
     }
   },
   "translatingTo": {
-    "message": "正在翻译为 $language$...",
+    "message": "正在翻译为 $1...",
     "description": "Loading text shown inline during block translation",
     "placeholders": {
-      "language": { "content": "$1", "example": "ko" }
+      "language": {
+        "content": "$1",
+        "example": "ko"
+      }
     }
   },
   "noSelectedText": {
@@ -196,10 +214,13 @@
     "description": "Broker page description text"
   },
   "brokerTranslating": {
-    "message": "正在本地翻译 $id$...",
+    "message": "正在本地翻译 $1...",
     "description": "Status shown during active broker translation",
     "placeholders": {
-      "id": { "content": "$1", "example": "xlat-broker-5" }
+      "id": {
+        "content": "$1",
+        "example": "xlat-broker-5"
+      }
     }
   },
   "brokerReady": {

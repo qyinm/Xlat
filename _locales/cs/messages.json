@@ -36,7 +36,7 @@
     "description": "Display mode option showing original text with translation below"
   },
   "displayModeReplace": {
-    "message": "Nahradit (fáze 2)",
+    "message": "Nahradit",
     "description": "Display mode option to replace text with translation"
   },
   "maxBlocks": {
@@ -60,11 +60,17 @@
     "description": "Status shown while page translation is in progress"
   },
   "translatedBlocks": {
-    "message": "Přeloženo $completed$/$total$ bloků stránky.",
+    "message": "Přeloženo $1/$2 bloků stránky.",
     "description": "Status after page translation completes",
     "placeholders": {
-      "completed": { "content": "$1", "example": "42" },
-      "total": { "content": "$2", "example": "80" }
+      "completed": {
+        "content": "$1",
+        "example": "42"
+      },
+      "total": {
+        "content": "$2",
+        "example": "80"
+      }
     }
   },
   "pageTranslationFailed": {
@@ -80,10 +86,13 @@
     "description": "Status when clearing translations fails"
   },
   "removedNodes": {
-    "message": "Odstraněno $removed$ uzlů Xlat.",
+    "message": "Odstraněno $1 uzlů Xlat.",
     "description": "Status after clearing translations",
     "placeholders": {
-      "removed": { "content": "$1", "example": "5" }
+      "removed": {
+        "content": "$1",
+        "example": "5"
+      }
     }
   },
   "noActiveTab": {
@@ -151,24 +160,33 @@
     "description": "Error when broker translation fails"
   },
   "translationUnavailable": {
-    "message": "Překlad není k dispozici pro $pair$.",
+    "message": "Překlad není k dispozici pro $1.",
     "description": "Error when translation is unavailable for a language pair",
     "placeholders": {
-      "pair": { "content": "$1", "example": "en->ko" }
+      "pair": {
+        "content": "$1",
+        "example": "en->ko"
+      }
     }
   },
   "unsupportedPage": {
-    "message": "Nepodporovaná stránka pro překlad obsahovým skriptem: $url$",
+    "message": "Nepodporovaná stránka pro překlad obsahovým skriptem: $1",
     "description": "Error when trying to translate on a restricted page",
     "placeholders": {
-      "url": { "content": "$1", "example": "chrome://settings" }
+      "url": {
+        "content": "$1",
+        "example": "chrome://settings"
+      }
     }
   },
   "translatingTo": {
-    "message": "Překládám do $language$...",
+    "message": "Překládám do $1...",
     "description": "Loading text shown inline during block translation",
     "placeholders": {
-      "language": { "content": "$1", "example": "ko" }
+      "language": {
+        "content": "$1",
+        "example": "ko"
+      }
     }
   },
   "noSelectedText": {
@@ -196,10 +214,13 @@
     "description": "Broker page description text"
   },
   "brokerTranslating": {
-    "message": "Lokálně překládám $id$...",
+    "message": "Lokálně překládám $1...",
     "description": "Status shown during active broker translation",
     "placeholders": {
-      "id": { "content": "$1", "example": "xlat-broker-5" }
+      "id": {
+        "content": "$1",
+        "example": "xlat-broker-5"
+      }
     }
   },
   "brokerReady": {

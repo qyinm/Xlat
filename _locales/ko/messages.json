@@ -1,50 +1,234 @@
 {
-  "appName": { "message": "Xlat 로컬 페이지 번역기", "description": "Extension name in Chrome Web Store and toolbar" },
-  "appDesc": { "message": "Chrome 내장 번역 API로 페이지와 선택한 텍스트를 로컬에서 번역합니다.", "description": "Extension description in Chrome Web Store" },
-  "appShortName": { "message": "Xlat", "description": "Short app name used in toolbar tooltip and page title" },
-  "translatePage": { "message": "페이지 번역", "description": "Main action button in popup" },
-  "clear": { "message": "지우기", "description": "Button to clear all translations" },
-  "ready": { "message": "준비.", "description": "Status bar default ready state text" },
-  "advanced": { "message": "고급 설정", "description": "Collapsible section label in popup" },
-  "displayMode": { "message": "표시 모드", "description": "Label for display mode dropdown" },
-  "displayModeOriginalBelow": { "message": "원문 + 아래", "description": "Display mode option showing original text with translation below" },
-  "displayModeReplace": { "message": "바꾸기 (2단계)", "description": "Display mode option to replace text with translation" },
-  "maxBlocks": { "message": "최대 블록 수", "description": "Label for max blocks input" },
-  "viewportOnly": { "message": "뷰포트만 번역", "description": "Checkbox label to translate only visible content" },
-  "langAuto": { "message": "자동 감지", "description": "Language dropdown option for automatic language detection" },
-  "langTl": { "message": "필리핀어", "description": "Language name for Tagalog/Filipino" },
-  "translatingPage": { "message": "페이지 번역 중...", "description": "Status shown while page translation is in progress" },
-  "translatedBlocks": { "message": "$completed$/$total$ 블록 번역 완료.", "description": "Status after page translation completes", "placeholders": { "completed": { "content": "$1", "example": "42" }, "total": { "content": "$2", "example": "80" } } },
-  "pageTranslationFailed": { "message": "페이지 번역 실패.", "description": "Status when page translation fails" },
-  "clearingTranslations": { "message": "번역 지우는 중...", "description": "Status shown while clearing translations" },
-  "clearFailed": { "message": "지우기 실패.", "description": "Status when clearing translations fails" },
-  "removedNodes": { "message": "$removed$개의 Xlat 노드를 제거했습니다.", "description": "Status after clearing translations", "placeholders": { "removed": { "content": "$1", "example": "5" } } },
-  "noActiveTab": { "message": "활성 탭이 없습니다.", "description": "Error when no active browser tab is found" },
-  "contentScriptNotReady": { "message": "콘텐츠 스크립트가 준비되지 않았습니다.", "description": "Error when content script is not yet injected" },
-  "optionsTitle": { "message": "Xlat 설정", "description": "Options page browser tab title" },
-  "optionsSettings": { "message": "Xlat 설정", "description": "Options page overline/section label" },
-  "optionsHeading": { "message": "기본 번역 설정", "description": "Options page main heading" },
-  "optionsDescription": { "message": "이 기본값은 Chrome 저장소에 저장되며, 각 로컬 번역 명령 전에 팝업에서 사용됩니다.", "description": "Options page description text" },
-  "defaultTargetLanguage": { "message": "기본 대상 언어", "description": "Label for default target language input" },
-  "maxBlocksPerRun": { "message": "실행당 최대 블록 수", "description": "Label for max blocks input in options" },
-  "translateViewportFirst": { "message": "보이는 영역만 번역", "description": "Checkbox label in options" },
-  "saved": { "message": "저장됨.", "description": "Status shown after saving settings" },
-  "moveWindow": { "message": "번역창 이동", "description": "ARIA label on the translation overlay drag handle" },
-  "closeTranslation": { "message": "번역 닫기", "description": "ARIA label on the translation overlay close button" },
-  "brokerTitle": { "message": "Xlat 로컬 번역 브로커", "description": "Title attribute on the hidden broker iframe" },
-  "brokerNotReady": { "message": "브로커 프레임이 준비되지 않았습니다.", "description": "Error when broker iframe fails to load" },
-  "brokerTimedOut": { "message": "브로커 번역 시간 초과.", "description": "Error when broker translation request times out" },
-  "brokerFailed": { "message": "브로커 번역 실패.", "description": "Error when broker translation fails" },
-  "translationUnavailable": { "message": "$pair$ 번역을 사용할 수 없습니다.", "description": "Error when translation is unavailable for a language pair", "placeholders": { "pair": { "content": "$1", "example": "en->ko" } } },
-  "unsupportedPage": { "message": "콘텐츠 스크립트 번역이 지원되지 않는 페이지입니다: $url$", "description": "Error when trying to translate on a restricted page", "placeholders": { "url": { "content": "$1", "example": "chrome://settings" } } },
-  "translatingTo": { "message": "$language$(으)로 번역 중...", "description": "Loading text shown inline during block translation", "placeholders": { "language": { "content": "$1", "example": "ko" } } },
-  "noSelectedText": { "message": "선택한 텍스트가 없습니다.", "description": "Error when no text is selected for selection translation" },
-  "contextMenuTitle": { "message": "Xlat로 선택 텍스트 번역", "description": "Right-click context menu item for selected text" },
-  "brokerPageTitle": { "message": "Xlat 로컬 브로커", "description": "Broker fallback page browser tab title" },
-  "brokerHeading": { "message": "Xlat 로컬 브로커", "description": "Broker fallback page heading" },
-  "brokerConnecting": { "message": "연결 중...", "description": "Initial status shown while broker loads" },
-  "brokerDescription": { "message": "이 확장 페이지는 콘텐츠 스크립트 실행이 불가능할 때 Chrome 내장 AI 호출을 대신 처리합니다.", "description": "Broker page description text" },
-  "brokerTranslating": { "message": "$id$ 로컬 번역 중...", "description": "Status shown during active broker translation", "placeholders": { "id": { "content": "$1", "example": "xlat-broker-5" } } },
-  "brokerReady": { "message": "준비.", "description": "Status when broker is ready or translation complete" },
-  "translatePageShortcut": { "message": "현재 페이지 번역", "description": "Description for the keyboard shortcut in chrome://extensions/shortcuts" }
+  "appName": {
+    "message": "Xlat 로컬 페이지 번역기",
+    "description": "Extension name in Chrome Web Store and toolbar"
+  },
+  "appDesc": {
+    "message": "Chrome 내장 번역 API로 페이지와 선택한 텍스트를 로컬에서 번역합니다.",
+    "description": "Extension description in Chrome Web Store"
+  },
+  "appShortName": {
+    "message": "Xlat",
+    "description": "Short app name used in toolbar tooltip and page title"
+  },
+  "translatePage": {
+    "message": "페이지 번역",
+    "description": "Main action button in popup"
+  },
+  "clear": {
+    "message": "지우기",
+    "description": "Button to clear all translations"
+  },
+  "ready": {
+    "message": "준비.",
+    "description": "Status bar default ready state text"
+  },
+  "advanced": {
+    "message": "고급 설정",
+    "description": "Collapsible section label in popup"
+  },
+  "displayMode": {
+    "message": "표시 모드",
+    "description": "Label for display mode dropdown"
+  },
+  "displayModeOriginalBelow": {
+    "message": "원문 + 아래",
+    "description": "Display mode option showing original text with translation below"
+  },
+  "displayModeReplace": {
+    "message": "바꾸기",
+    "description": "Display mode option to replace text with translation"
+  },
+  "maxBlocks": {
+    "message": "최대 블록 수",
+    "description": "Label for max blocks input"
+  },
+  "viewportOnly": {
+    "message": "뷰포트만 번역",
+    "description": "Checkbox label to translate only visible content"
+  },
+  "langAuto": {
+    "message": "자동 감지",
+    "description": "Language dropdown option for automatic language detection"
+  },
+  "langTl": {
+    "message": "필리핀어",
+    "description": "Language name for Tagalog/Filipino"
+  },
+  "translatingPage": {
+    "message": "페이지 번역 중...",
+    "description": "Status shown while page translation is in progress"
+  },
+  "translatedBlocks": {
+    "message": "$1/$2 블록 번역 완료.",
+    "description": "Status after page translation completes",
+    "placeholders": {
+      "completed": {
+        "content": "$1",
+        "example": "42"
+      },
+      "total": {
+        "content": "$2",
+        "example": "80"
+      }
+    }
+  },
+  "pageTranslationFailed": {
+    "message": "페이지 번역 실패.",
+    "description": "Status when page translation fails"
+  },
+  "clearingTranslations": {
+    "message": "번역 지우는 중...",
+    "description": "Status shown while clearing translations"
+  },
+  "clearFailed": {
+    "message": "지우기 실패.",
+    "description": "Status when clearing translations fails"
+  },
+  "removedNodes": {
+    "message": "$1개의 Xlat 노드를 제거했습니다.",
+    "description": "Status after clearing translations",
+    "placeholders": {
+      "removed": {
+        "content": "$1",
+        "example": "5"
+      }
+    }
+  },
+  "noActiveTab": {
+    "message": "활성 탭이 없습니다.",
+    "description": "Error when no active browser tab is found"
+  },
+  "contentScriptNotReady": {
+    "message": "콘텐츠 스크립트가 준비되지 않았습니다.",
+    "description": "Error when content script is not yet injected"
+  },
+  "optionsTitle": {
+    "message": "Xlat 설정",
+    "description": "Options page browser tab title"
+  },
+  "optionsSettings": {
+    "message": "Xlat 설정",
+    "description": "Options page overline/section label"
+  },
+  "optionsHeading": {
+    "message": "기본 번역 설정",
+    "description": "Options page main heading"
+  },
+  "optionsDescription": {
+    "message": "이 기본값은 Chrome 저장소에 저장되며, 각 로컬 번역 명령 전에 팝업에서 사용됩니다.",
+    "description": "Options page description text"
+  },
+  "defaultTargetLanguage": {
+    "message": "기본 대상 언어",
+    "description": "Label for default target language input"
+  },
+  "maxBlocksPerRun": {
+    "message": "실행당 최대 블록 수",
+    "description": "Label for max blocks input in options"
+  },
+  "translateViewportFirst": {
+    "message": "보이는 영역만 번역",
+    "description": "Checkbox label in options"
+  },
+  "saved": {
+    "message": "저장됨.",
+    "description": "Status shown after saving settings"
+  },
+  "moveWindow": {
+    "message": "번역창 이동",
+    "description": "ARIA label on the translation overlay drag handle"
+  },
+  "closeTranslation": {
+    "message": "번역 닫기",
+    "description": "ARIA label on the translation overlay close button"
+  },
+  "brokerTitle": {
+    "message": "Xlat 로컬 번역 브로커",
+    "description": "Title attribute on the hidden broker iframe"
+  },
+  "brokerNotReady": {
+    "message": "브로커 프레임이 준비되지 않았습니다.",
+    "description": "Error when broker iframe fails to load"
+  },
+  "brokerTimedOut": {
+    "message": "브로커 번역 시간 초과.",
+    "description": "Error when broker translation request times out"
+  },
+  "brokerFailed": {
+    "message": "브로커 번역 실패.",
+    "description": "Error when broker translation fails"
+  },
+  "translationUnavailable": {
+    "message": "$1 번역을 사용할 수 없습니다.",
+    "description": "Error when translation is unavailable for a language pair",
+    "placeholders": {
+      "pair": {
+        "content": "$1",
+        "example": "en->ko"
+      }
+    }
+  },
+  "unsupportedPage": {
+    "message": "콘텐츠 스크립트 번역이 지원되지 않는 페이지입니다: $1",
+    "description": "Error when trying to translate on a restricted page",
+    "placeholders": {
+      "url": {
+        "content": "$1",
+        "example": "chrome://settings"
+      }
+    }
+  },
+  "translatingTo": {
+    "message": "$1(으)로 번역 중...",
+    "description": "Loading text shown inline during block translation",
+    "placeholders": {
+      "language": {
+        "content": "$1",
+        "example": "ko"
+      }
+    }
+  },
+  "noSelectedText": {
+    "message": "선택한 텍스트가 없습니다.",
+    "description": "Error when no text is selected for selection translation"
+  },
+  "contextMenuTitle": {
+    "message": "Xlat로 선택 텍스트 번역",
+    "description": "Right-click context menu item for selected text"
+  },
+  "brokerPageTitle": {
+    "message": "Xlat 로컬 브로커",
+    "description": "Broker fallback page browser tab title"
+  },
+  "brokerHeading": {
+    "message": "Xlat 로컬 브로커",
+    "description": "Broker fallback page heading"
+  },
+  "brokerConnecting": {
+    "message": "연결 중...",
+    "description": "Initial status shown while broker loads"
+  },
+  "brokerDescription": {
+    "message": "이 확장 페이지는 콘텐츠 스크립트 실행이 불가능할 때 Chrome 내장 AI 호출을 대신 처리합니다.",
+    "description": "Broker page description text"
+  },
+  "brokerTranslating": {
+    "message": "$1 로컬 번역 중...",
+    "description": "Status shown during active broker translation",
+    "placeholders": {
+      "id": {
+        "content": "$1",
+        "example": "xlat-broker-5"
+      }
+    }
+  },
+  "brokerReady": {
+    "message": "준비.",
+    "description": "Status when broker is ready or translation complete"
+  },
+  "translatePageShortcut": {
+    "message": "현재 페이지 번역",
+    "description": "Description for the keyboard shortcut in chrome://extensions/shortcuts"
+  }
 }

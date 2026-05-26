@@ -1,50 +1,234 @@
 {
-  "appName": { "message": "Xlat Traducteur de page local", "description": "Extension name in Chrome Web Store and toolbar" },
-  "appDesc": { "message": "Traduisez la page et le texte sélectionné localement avec l'API de traduction intégrée de Chrome.", "description": "Extension description in Chrome Web Store" },
-  "appShortName": { "message": "Xlat", "description": "Short app name used in toolbar tooltip and page title" },
-  "translatePage": { "message": "Traduire la page", "description": "Main action button in popup" },
-  "clear": { "message": "Effacer", "description": "Button to clear all translations" },
-  "ready": { "message": "Prêt.", "description": "Status bar default ready state text" },
-  "advanced": { "message": "Avancé", "description": "Collapsible section label in popup" },
-  "displayMode": { "message": "Mode d'affichage", "description": "Label for display mode dropdown" },
-  "displayModeOriginalBelow": { "message": "Original + dessous", "description": "Display mode option showing original text with translation below" },
-  "displayModeReplace": { "message": "Remplacer (phase 2)", "description": "Display mode option to replace text with translation" },
-  "maxBlocks": { "message": "Blocs max", "description": "Label for max blocks input" },
-  "viewportOnly": { "message": "Zone visible uniquement", "description": "Checkbox label to translate only visible content" },
-  "langAuto": { "message": "Détection automatique", "description": "Language dropdown option for automatic language detection" },
-  "langTl": { "message": "Filipino", "description": "Language name for Tagalog/Filipino" },
-  "translatingPage": { "message": "Traduction de la page en cours...", "description": "Status shown while page translation is in progress" },
-  "translatedBlocks": { "message": "$completed$/$total$ blocs traduits.", "description": "Status after page translation completes", "placeholders": { "completed": { "content": "$1", "example": "42" }, "total": { "content": "$2", "example": "80" } } },
-  "pageTranslationFailed": { "message": "Échec de la traduction de la page.", "description": "Status when page translation fails" },
-  "clearingTranslations": { "message": "Effacement des traductions...", "description": "Status shown while clearing translations" },
-  "clearFailed": { "message": "Échec de l'effacement.", "description": "Status when clearing translations fails" },
-  "removedNodes": { "message": "$removed$ nœuds Xlat supprimés.", "description": "Status after clearing translations", "placeholders": { "removed": { "content": "$1", "example": "5" } } },
-  "noActiveTab": { "message": "Aucun onglet actif.", "description": "Error when no active browser tab is found" },
-  "contentScriptNotReady": { "message": "Le script de contenu n'est pas prêt.", "description": "Error when content script is not yet injected" },
-  "optionsTitle": { "message": "Options Xlat", "description": "Options page browser tab title" },
-  "optionsSettings": { "message": "Paramètres Xlat", "description": "Options page overline/section label" },
-  "optionsHeading": { "message": "Préférences de traduction par défaut", "description": "Options page main heading" },
-  "optionsDescription": { "message": "Ces valeurs par défaut sont stockées dans Chrome et utilisées par la popup avant chaque commande de traduction locale.", "description": "Options page description text" },
-  "defaultTargetLanguage": { "message": "Langue cible par défaut", "description": "Label for default target language input" },
-  "maxBlocksPerRun": { "message": "Blocs max par exécution", "description": "Label for max blocks input in options" },
-  "translateViewportFirst": { "message": "Traduire la zone visible d'abord", "description": "Checkbox label in options" },
-  "saved": { "message": "Enregistré.", "description": "Status shown after saving settings" },
-  "moveWindow": { "message": "Déplacer la fenêtre de traduction", "description": "ARIA label on the translation overlay drag handle" },
-  "closeTranslation": { "message": "Fermer la traduction", "description": "ARIA label on the translation overlay close button" },
-  "brokerTitle": { "message": "Courtier de traduction local Xlat", "description": "Title attribute on the hidden broker iframe" },
-  "brokerNotReady": { "message": "Le cadre du courtier n'est pas devenu prêt.", "description": "Error when broker iframe fails to load" },
-  "brokerTimedOut": { "message": "La traduction du courtier a expiré.", "description": "Error when broker translation request times out" },
-  "brokerFailed": { "message": "Échec de la traduction du courtier.", "description": "Error when broker translation fails" },
-  "translationUnavailable": { "message": "Traduction indisponible pour $pair$.", "description": "Error when translation is unavailable for a language pair", "placeholders": { "pair": { "content": "$1", "example": "en->ko" } } },
-  "unsupportedPage": { "message": "Page non prise en charge pour la traduction par script de contenu : $url$", "description": "Error when trying to translate on a restricted page", "placeholders": { "url": { "content": "$1", "example": "chrome://settings" } } },
-  "translatingTo": { "message": "Traduction vers $language$...", "description": "Loading text shown inline during block translation", "placeholders": { "language": { "content": "$1", "example": "ko" } } },
-  "noSelectedText": { "message": "Aucun texte sélectionné à traduire.", "description": "Error when no text is selected for selection translation" },
-  "contextMenuTitle": { "message": "Traduire le texte sélectionné avec Xlat", "description": "Right-click context menu item for selected text" },
-  "brokerPageTitle": { "message": "Courtier local Xlat", "description": "Broker fallback page browser tab title" },
-  "brokerHeading": { "message": "Courtier local Xlat", "description": "Broker fallback page heading" },
-  "brokerConnecting": { "message": "Connexion...", "description": "Initial status shown while broker loads" },
-  "brokerDescription": { "message": "Cette page d'extension gère les appels IA intégrés de Chrome de secours lorsque l'exécution du script de contenu est indisponible.", "description": "Broker page description text" },
-  "brokerTranslating": { "message": "Traduction locale de $id$...", "description": "Status shown during active broker translation", "placeholders": { "id": { "content": "$1", "example": "xlat-broker-5" } } },
-  "brokerReady": { "message": "Prêt.", "description": "Status when broker is ready or translation complete" },
-  "translatePageShortcut": { "message": "Traduire la page actuelle", "description": "Description for the keyboard shortcut in chrome://extensions/shortcuts" }
+  "appName": {
+    "message": "Xlat Traducteur de page local",
+    "description": "Extension name in Chrome Web Store and toolbar"
+  },
+  "appDesc": {
+    "message": "Traduisez la page et le texte sélectionné localement avec l'API de traduction intégrée de Chrome.",
+    "description": "Extension description in Chrome Web Store"
+  },
+  "appShortName": {
+    "message": "Xlat",
+    "description": "Short app name used in toolbar tooltip and page title"
+  },
+  "translatePage": {
+    "message": "Traduire la page",
+    "description": "Main action button in popup"
+  },
+  "clear": {
+    "message": "Effacer",
+    "description": "Button to clear all translations"
+  },
+  "ready": {
+    "message": "Prêt.",
+    "description": "Status bar default ready state text"
+  },
+  "advanced": {
+    "message": "Avancé",
+    "description": "Collapsible section label in popup"
+  },
+  "displayMode": {
+    "message": "Mode d'affichage",
+    "description": "Label for display mode dropdown"
+  },
+  "displayModeOriginalBelow": {
+    "message": "Original + dessous",
+    "description": "Display mode option showing original text with translation below"
+  },
+  "displayModeReplace": {
+    "message": "Remplacer",
+    "description": "Display mode option to replace text with translation"
+  },
+  "maxBlocks": {
+    "message": "Blocs max",
+    "description": "Label for max blocks input"
+  },
+  "viewportOnly": {
+    "message": "Zone visible uniquement",
+    "description": "Checkbox label to translate only visible content"
+  },
+  "langAuto": {
+    "message": "Détection automatique",
+    "description": "Language dropdown option for automatic language detection"
+  },
+  "langTl": {
+    "message": "Filipino",
+    "description": "Language name for Tagalog/Filipino"
+  },
+  "translatingPage": {
+    "message": "Traduction de la page en cours...",
+    "description": "Status shown while page translation is in progress"
+  },
+  "translatedBlocks": {
+    "message": "$1/$2 blocs traduits.",
+    "description": "Status after page translation completes",
+    "placeholders": {
+      "completed": {
+        "content": "$1",
+        "example": "42"
+      },
+      "total": {
+        "content": "$2",
+        "example": "80"
+      }
+    }
+  },
+  "pageTranslationFailed": {
+    "message": "Échec de la traduction de la page.",
+    "description": "Status when page translation fails"
+  },
+  "clearingTranslations": {
+    "message": "Effacement des traductions...",
+    "description": "Status shown while clearing translations"
+  },
+  "clearFailed": {
+    "message": "Échec de l'effacement.",
+    "description": "Status when clearing translations fails"
+  },
+  "removedNodes": {
+    "message": "$1 nœuds Xlat supprimés.",
+    "description": "Status after clearing translations",
+    "placeholders": {
+      "removed": {
+        "content": "$1",
+        "example": "5"
+      }
+    }
+  },
+  "noActiveTab": {
+    "message": "Aucun onglet actif.",
+    "description": "Error when no active browser tab is found"
+  },
+  "contentScriptNotReady": {
+    "message": "Le script de contenu n'est pas prêt.",
+    "description": "Error when content script is not yet injected"
+  },
+  "optionsTitle": {
+    "message": "Options Xlat",
+    "description": "Options page browser tab title"
+  },
+  "optionsSettings": {
+    "message": "Paramètres Xlat",
+    "description": "Options page overline/section label"
+  },
+  "optionsHeading": {
+    "message": "Préférences de traduction par défaut",
+    "description": "Options page main heading"
+  },
+  "optionsDescription": {
+    "message": "Ces valeurs par défaut sont stockées dans Chrome et utilisées par la popup avant chaque commande de traduction locale.",
+    "description": "Options page description text"
+  },
+  "defaultTargetLanguage": {
+    "message": "Langue cible par défaut",
+    "description": "Label for default target language input"
+  },
+  "maxBlocksPerRun": {
+    "message": "Blocs max par exécution",
+    "description": "Label for max blocks input in options"
+  },
+  "translateViewportFirst": {
+    "message": "Traduire la zone visible d'abord",
+    "description": "Checkbox label in options"
+  },
+  "saved": {
+    "message": "Enregistré.",
+    "description": "Status shown after saving settings"
+  },
+  "moveWindow": {
+    "message": "Déplacer la fenêtre de traduction",
+    "description": "ARIA label on the translation overlay drag handle"
+  },
+  "closeTranslation": {
+    "message": "Fermer la traduction",
+    "description": "ARIA label on the translation overlay close button"
+  },
+  "brokerTitle": {
+    "message": "Courtier de traduction local Xlat",
+    "description": "Title attribute on the hidden broker iframe"
+  },
+  "brokerNotReady": {
+    "message": "Le cadre du courtier n'est pas devenu prêt.",
+    "description": "Error when broker iframe fails to load"
+  },
+  "brokerTimedOut": {
+    "message": "La traduction du courtier a expiré.",
+    "description": "Error when broker translation request times out"
+  },
+  "brokerFailed": {
+    "message": "Échec de la traduction du courtier.",
+    "description": "Error when broker translation fails"
+  },
+  "translationUnavailable": {
+    "message": "Traduction indisponible pour $1.",
+    "description": "Error when translation is unavailable for a language pair",
+    "placeholders": {
+      "pair": {
+        "content": "$1",
+        "example": "en->ko"
+      }
+    }
+  },
+  "unsupportedPage": {
+    "message": "Page non prise en charge pour la traduction par script de contenu : $1",
+    "description": "Error when trying to translate on a restricted page",
+    "placeholders": {
+      "url": {
+        "content": "$1",
+        "example": "chrome://settings"
+      }
+    }
+  },
+  "translatingTo": {
+    "message": "Traduction vers $1...",
+    "description": "Loading text shown inline during block translation",
+    "placeholders": {
+      "language": {
+        "content": "$1",
+        "example": "ko"
+      }
+    }
+  },
+  "noSelectedText": {
+    "message": "Aucun texte sélectionné à traduire.",
+    "description": "Error when no text is selected for selection translation"
+  },
+  "contextMenuTitle": {
+    "message": "Traduire le texte sélectionné avec Xlat",
+    "description": "Right-click context menu item for selected text"
+  },
+  "brokerPageTitle": {
+    "message": "Courtier local Xlat",
+    "description": "Broker fallback page browser tab title"
+  },
+  "brokerHeading": {
+    "message": "Courtier local Xlat",
+    "description": "Broker fallback page heading"
+  },
+  "brokerConnecting": {
+    "message": "Connexion...",
+    "description": "Initial status shown while broker loads"
+  },
+  "brokerDescription": {
+    "message": "Cette page d'extension gère les appels IA intégrés de Chrome de secours lorsque l'exécution du script de contenu est indisponible.",
+    "description": "Broker page description text"
+  },
+  "brokerTranslating": {
+    "message": "Traduction locale de $1...",
+    "description": "Status shown during active broker translation",
+    "placeholders": {
+      "id": {
+        "content": "$1",
+        "example": "xlat-broker-5"
+      }
+    }
+  },
+  "brokerReady": {
+    "message": "Prêt.",
+    "description": "Status when broker is ready or translation complete"
+  },
+  "translatePageShortcut": {
+    "message": "Traduire la page actuelle",
+    "description": "Description for the keyboard shortcut in chrome://extensions/shortcuts"
+  }
 }

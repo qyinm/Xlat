@@ -64,7 +64,6 @@ chrome.commands.onCommand.addListener(async (command) => {
     type: MessageType.TRANSLATE_PAGE,
     sourceLanguage: settings.sourceLanguage,
     targetLanguage: settings.targetLanguage,
-    maxBlocks: settings.maxBlocks,
     viewportOnly: settings.viewportOnly,
   });
   translatedTabs.set(tab.id, true);

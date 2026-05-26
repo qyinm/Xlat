@@ -1,7 +1,8 @@
 export const SKIP_SELECTOR = [
   'script', 'style', 'noscript', 'textarea', 'input', 'select', 'option',
-  'code', 'pre', 'kbd', 'samp', 'svg', 'canvas', 'iframe',
-  '[contenteditable="true"]', '[aria-hidden="true"]', '.xlat-translation', '.xlat-selection-overlay'
+  'code', 'pre', 'kbd', 'samp', 'svg', 'canvas', 'iframe', 'button', 'nav',
+  '[contenteditable="true"]', '[aria-hidden="true"]', '[role="tooltip"]', '[role="button"]', '[role="menu"]', '[role="navigation"]',
+  '.xlat-translation', '.xlat-selection-overlay'
 ].join(',');
 
 export const BLOCK_SELECTOR = 'p,li,blockquote,h1,h2,h3,h4,h5,h6,td,th,figcaption,caption,article,section,div';

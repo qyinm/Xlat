@@ -69,7 +69,6 @@ const targetLanguageEl = document.querySelector('#targetLanguage');
 const translatePageButton = document.querySelector('#translatePage');
 const clearTranslationsButton = document.querySelector('#clearTranslations');
 const displayModeEl = document.querySelector('#displayMode');
-const maxBlocksEl = document.querySelector('#maxBlocks');
 const viewportOnlyEl = document.querySelector('#viewportOnly');
 const uiLanguageEl = document.querySelector('#uiLanguage');
 const advancedDetails = document.querySelectorAll('.advanced');
@@ -119,10 +118,9 @@ async function currentCommandOptions() {
   const sourceLanguage = sourceLanguageEl.value;
   const targetLanguage = targetLanguageEl.value.trim() || 'ko';
   const displayMode = displayModeEl.value || 'append-below-original';
-  const maxBlocks = Math.max(1, Math.min(500, Number(maxBlocksEl.value || 80)));
   const viewportOnly = Boolean(viewportOnlyEl.checked);
-  await saveSettings({ sourceLanguage, targetLanguage, displayMode, maxBlocks, viewportOnly });
-  return { sourceLanguage, targetLanguage, displayMode, maxBlocks, viewportOnly };
+  await saveSettings({ sourceLanguage, targetLanguage, displayMode, viewportOnly });
+  return { sourceLanguage, targetLanguage, displayMode, viewportOnly };
 }
 
 async function sendToActiveTab(message) {
@@ -144,7 +142,6 @@ async function init() {
   sourceLanguageEl.value = settings.sourceLanguage || 'auto';
   targetLanguageEl.value = settings.targetLanguage;
   displayModeEl.value = settings.displayMode;
-  maxBlocksEl.value = settings.maxBlocks;
   viewportOnlyEl.checked = settings.viewportOnly;
   uiLanguageEl.value = settings.uiLanguage || '';
 
@@ -153,7 +150,6 @@ async function init() {
   sourceLanguageEl.addEventListener('change', () => saveSettings({ sourceLanguage: sourceLanguageEl.value }));
   targetLanguageEl.addEventListener('change', () => saveSettings({ targetLanguage: targetLanguageEl.value.trim() || 'ko' }));
   displayModeEl.addEventListener('change', () => saveSettings({ displayMode: displayModeEl.value }));
-  maxBlocksEl.addEventListener('change', () => saveSettings({ maxBlocks: Math.max(1, Math.min(500, Number(maxBlocksEl.value || 80))) }));
   viewportOnlyEl.addEventListener('change', () => saveSettings({ viewportOnly: Boolean(viewportOnlyEl.checked) }));
   uiLanguageEl.addEventListener('change', async () => {
     await saveSettings({ uiLanguage: uiLanguageEl.value });

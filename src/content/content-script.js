@@ -10,9 +10,10 @@ const ENGINE_DECISION = Object.freeze({ CONTENT_SCRIPT: 'content-script', BROKER
 const REQUIRED_CHECKS = Object.freeze(['translatorVisible', 'languageDetectorVisible', 'availabilityCallable', 'createCallableAfterUserGesture', 'sampleTranslateCallable']);
 const SAMPLE_PAIR = Object.freeze({ sourceLanguage: 'en', targetLanguage: 'ko' });
 const SAMPLE_TEXT = 'Hello from Xlat local translation spike.';
-const SKIP_SELECTOR = 'script,style,noscript,textarea,input,select,option,code,pre,kbd,samp,svg,canvas,iframe,[contenteditable="true"],[aria-hidden="true"],.xlat-translation,.xlat-selection-overlay';
+const SKIP_SELECTOR = 'script,style,noscript,textarea,input,select,option,code,pre,kbd,samp,svg,canvas,iframe,button,nav,[contenteditable="true"],[aria-hidden="true"],[role="tooltip"],[role="button"],[role="menu"],[role="navigation"],.xlat-translation,.xlat-selection-overlay';
 const BLOCK_SELECTOR = 'p,li,blockquote,h1,h2,h3,h4,h5,h6,td,th,figcaption,caption,article,section,div';
 const translatorCache = new Map();
+const originalContentMap = new Map();
 
 let brokerFrame = null;
 let brokerReadyPromise = null;
@@ -115,7 +116,7 @@ function isInViewport(element) {
   const rect = element.getBoundingClientRect();
   return rect.bottom >= 0 && rect.right >= 0 && rect.top <= innerHeight && rect.left <= innerWidth;
 }
-function collectBlocks({ minLength = 2, maxBlocks = 160, viewportOnly = false } = {}) {
+function collectBlocks({ minLength = 2, maxBlocks = Infinity, viewportOnly = false } = {}) {
   if (!document.body) return [];
   const blockMap = new Map();
   const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
@@ -131,6 +132,7 @@ function collectBlocks({ minLength = 2, maxBlocks = 160, viewportOnly = false } 
     if (!block || shouldSkipElement(block)) continue;
     if (viewportOnly && !isInViewport(block)) continue;
     if (block.querySelector(':scope > .xlat-translation')) continue;
+    if (block.dataset.xlatReplaced) continue;
     const previous = blockMap.get(block) || '';
     blockMap.set(block, normalizeText(`${previous} ${textNode.nodeValue}`));
   }
@@ -144,7 +146,15 @@ function collectBlocks({ minLength = 2, maxBlocks = 160, viewportOnly = false } 
   }
   return blocks;
 }
-function appendTranslation(block, translatedText, { targetLanguage = 'unknown', status = 'translated' } = {}) {
+function appendTranslation(block, translatedText, { targetLanguage = 'unknown', status = 'translated', displayMode } = {}) {
+  if (displayMode === 'replace-text') {
+    if (status === 'loading') return;
+    originalContentMap.set(block.element, block.element.innerHTML);
+    block.element.textContent = translatedText;
+    block.element.dataset.xlatReplaced = 'true';
+    block.element.lang = targetLanguage;
+    return block.element;
+  }
   const existing = block.element.parentElement?.querySelector(`.xlat-translation[data-xlat-id="${CSS.escape(block.id)}"]`);
   const node = existing || document.createElement('span');
   node.className = 'xlat-translation';
@@ -156,7 +166,19 @@ function appendTranslation(block, translatedText, { targetLanguage = 'unknown', 
   if (!existing) block.element.insertAdjacentElement('afterend', node);
   return node;
 }
-function clearTranslations() { removeSelectionDot(); const nodes = document.querySelectorAll('.xlat-translation,.xlat-selection-overlay'); nodes.forEach((node) => node.remove()); return nodes.length; }
+function clearTranslations() {
+  removeSelectionDot();
+  const nodes = document.querySelectorAll('.xlat-translation,.xlat-selection-overlay');
+  nodes.forEach((node) => node.remove());
+  const replaced = document.querySelectorAll('[data-xlat-replaced]');
+  replaced.forEach((el) => {
+    const original = originalContentMap.get(el);
+    if (original !== undefined) el.innerHTML = original;
+    delete el.dataset.xlatReplaced;
+    el.lang = '';
+  });
+  return nodes.length + replaced.length;
+}
 const SELECTION_OVERLAY_MARGIN = 8;
 const SELECTION_OVERLAY_GAP = 8;
 const SELECTION_OVERLAY_WIDTH = 360;
@@ -402,15 +424,16 @@ async function translateLocal(text, { targetLanguage = 'ko', sourceLanguage } = 
 async function translatePage(options = {}) {
   if (isRestrictedPage()) throw new Error(t('unsupportedPage', location.href));
   const targetLanguage = options.targetLanguage || 'ko';
-  const blocks = collectBlocks({ maxBlocks: options.maxBlocks || 80, viewportOnly: Boolean(options.viewportOnly) });
+  const displayMode = options.displayMode || 'append-below-original';
+  const blocks = collectBlocks({ viewportOnly: Boolean(options.viewportOnly) });
   setStatus({ state: 'translating-page', completed: 0, total: blocks.length, error: null });
   for (const block of blocks) {
     try {
-      appendTranslation(block, t('translatingTo', targetLanguage), { targetLanguage, status: 'loading' });
+      appendTranslation(block, t('translatingTo', targetLanguage), { targetLanguage, status: 'loading', displayMode });
       const translated = await translateLocal(block.text, { targetLanguage });
-      appendTranslation(block, translated, { targetLanguage, status: 'translated' });
+      appendTranslation(block, translated, { targetLanguage, status: 'translated', displayMode });
     } catch (error) {
-      appendTranslation(block, String(error?.message ?? error), { targetLanguage, status: 'error' });
+      appendTranslation(block, String(error?.message ?? error), { targetLanguage, status: 'error', displayMode });
     }
     setStatus({ completed: currentStatus.completed + 1 });
   }
