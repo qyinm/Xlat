@@ -20,7 +20,22 @@ function t(key) {
   return chrome.i18n.getMessage(key) || key;
 }
 
-loadSettings().then((s) => loadMessages(s.uiLanguage));
+const initialMessagesReady = loadSettings().then((s) => loadMessages(s.uiLanguage));
+
+async function syncContextMenuTitle() {
+  const title = t('contextMenuTitle');
+  try {
+    await chrome.contextMenus.update(XLAT_CONTEXT_MENU_TRANSLATE_SELECTION, { title });
+  } catch (_) {
+    await chrome.contextMenus.create({ id: XLAT_CONTEXT_MENU_TRANSLATE_SELECTION, title, contexts: ['selection'] });
+  }
+}
+
+async function setUiLanguage(locale) {
+  await initialMessagesReady.catch(() => {});
+  await loadMessages(locale);
+  await syncContextMenuTitle();
+}
 
 const translatedTabs = new Map();
 
@@ -36,7 +51,12 @@ async function ensureContentScript(tabId) {
 }
 
 chrome.runtime.onInstalled.addListener(() => {
-  chrome.contextMenus.create({ id: XLAT_CONTEXT_MENU_TRANSLATE_SELECTION, title: t('contextMenuTitle'), contexts: ['selection'] });
+  initialMessagesReady.then(syncContextMenuTitle);
+});
+
+chrome.storage.onChanged.addListener((changes, areaName) => {
+  if (areaName !== 'sync' || !Object.prototype.hasOwnProperty.call(changes, 'uiLanguage')) return;
+  setUiLanguage(changes.uiLanguage.newValue || '');
 });
 
 chrome.tabs.onUpdated.addListener((tabId) => {
